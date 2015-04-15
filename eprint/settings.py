@@ -1,7 +1,10 @@
 # Django settings for eprint project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+SITE_ROOT=os.path.join(os.path.abspath(os.path.dirname(__file__)),'..')
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -60,7 +63,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(SITE_ROOT,'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -68,6 +71,10 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    ("css", os.path.join(STATIC_ROOT,'css')),
+    ("js", os.path.join(STATIC_ROOT,'js')),
+    ("img", os.path.join(STATIC_ROOT,'img')),
+    ("fonts", os.path.join(STATIC_ROOT,'fonts')),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -107,6 +114,7 @@ ROOT_URLCONF = 'eprint.urls'
 WSGI_APPLICATION = 'eprint.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(SITE_ROOT,'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
