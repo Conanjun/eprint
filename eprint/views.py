@@ -16,3 +16,6 @@ def user_login(request):
 		return HttpResponse('Ok')
 	else:
 		return HttpResponseRedirect('/')
+
+def contact(request):
+	return HttpResponse('Contact us by email: hackeris@qq.com')
