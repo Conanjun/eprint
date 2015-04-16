@@ -23,10 +23,10 @@
 {% block custom_css %}
 
 {% endblock %}
-
   </head>
+
   <body>
-    <div class="container">
+    <div class="navbar-container">
         <nav class="navbar navbar-inverse navbar-lg" role="navigation">
         	<a class="navbar-brand" href="/">E Print</a>
 {% block navbar %}
@@ -40,11 +40,9 @@
 {% endblock %}
 		</nav>
         <!-- /.navbar-->
+    </div>
 {% block content %}		
 {% endblock %}
-
-    </div>
-    <!-- /.container -->
 
 {% block footer %}
 	<div class="navbar-fixed-bottom footer" >

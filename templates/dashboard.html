@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block custom_css %}
+<style type="text/css">
+	.sidebar {
+		position: fixed;
+		z-index: 1000;
+		width: 150px;
+		left: 20px;
+		overflow: auto;
+		list-style-type: none;
+		margin-top: 0px;
+	}
+	.sidebar li {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.container {
+		margin-top: -20px;
+		margin-left: 250px;
+		width: 960px;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+<ul class="sidebar hide-on-tablets">
+	<h6 style="color: #fff;">个人中心</h6>
+	<p style="color: #fff;">Hackeris</p>
+	<li><a href="#user-info">个人信息</a></li>
+	<li><a href="#my-print">我的打印</a></li>
+</ul> <!-- /nav -->
+
+<div class="container" style="color: #fff;">
+	<h4 id="user-info">个人信息</h4>
+	<input type="text" placeholder="Nick Name" class="form-control" />
+
+	<h4 id="my-print">我的打印</h4>
+
+</div>
+{% endblock %}

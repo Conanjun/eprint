@@ -6,4 +6,4 @@ from django.shortcuts import HttpResponseRedirect
 
 
 def dashboard(request):
-	return HttpResponse('Dash board')
+	return render_to_response('dashboard.html')

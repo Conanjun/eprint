@@ -2,6 +2,13 @@ html,body {
 	height: 100%;
 	background-color: #34495e;
 }
+.navbar-container {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	padding-left: 15px;
+	padding-right: 15px;
+}
 .container {
 	width: 100%;
 	padding-bottom: 80px;
