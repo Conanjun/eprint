@@ -1,84 +1,35 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <title>E Print</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Loading Bootstrap -->
-    <link href="/static/css/vendor/bootstrap.min.css" rel="stylesheet">
-    <!-- Loading Flat UI -->
-    <link href="/static/css/flat-ui.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="/static/css/page-frame.css">
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-    <!--[if lt IE 9]>
-      <script src="js/vendor/html5shiv.js"></script>
-      <script src="js/vendor/respond.min.js"></script>
-    <![endif]-->
+{% extends 'base.html' %}
 
+{% block custom_css %}
     <style type="text/css">
-    	.wrapper {
+        .wrapper {
             text-align: center;
             color: #fff;
-    		background-color: #405564;
-    		height: 300px;
+            background-color: #405564;
+            height: 300px;
             margin: 20px auto 20px auto;
-    		width: 460px;
-    	}
-    	.register-wrapper {
+            width: 460px;
+        }
+        .register-wrapper {
             width: 250px;
             margin-left: auto;
             margin-right: auto;
             padding-top: 50px;
         }
     </style>
+{% endblock %}
 
-  </head>
-  <body>
-    <div class="container">
-        <nav class="navbar navbar-inverse navbar-lg" role="navigation">
-        	<a class="navbar-brand" href="#">E Print</a>
-			<!-- Navbar content -->
-			<form class="navbar-form navbar-right" action="/login" method="POST" id="user-form">
+{% block content %}
+
+    <div class="wrapper">
+        <div class="register-wrapper">
+            <form class="form-group" method="POST" action="/register">
                 {% csrf_token %}
-				<input type="text" placeholder="邮箱" class="form-control" />
-				<input type="password" placeholder="密码" class="form-control" />
-				<input type="submit" value="登录" class="btn btn-default navbar-btn" style="width:120px;" />
-			</form>
-		</nav>
-        <!-- /.navbar-->
-
-		<div class="wrapper">
-			<div class="register-wrapper">
-                <form class="form-group" method="POST" action="/register">
-                    {% csrf_token %}
-                    <input type="text" placeholder="邮箱" class="form-control" style="background-color: #293a4a;margin: 10px 0 10px 0;width:250px;color:#fff;"/>
-                    <input type="password" placeholder="密码" class="form-control" style="background-color: #293a4a;margin: 10px 0 10px 0;width:250px;color:#fff;" />
-                    <input type="submit" value="注册" class="btn btn-embossed btn-primary" style="width:230px;" />
-                </form>
-			</div>
-		</div>
-        <!-- /.wrapper-->
-    </div>
-    <!-- /.container -->
-
-
-	<div class="navbar-fixed-bottom footer" >
-		<div class="footer-wrapper">
-            <a href="/contact">联系我们</a>
-            <p style="color:#fff">@hackeris</p>
+                <input type="text" placeholder="邮箱" class="form-control" style="background-color: #293a4a;margin: 10px 0 10px 0;width:250px;color:#fff;"/>
+                <input type="password" placeholder="密码" class="form-control" style="background-color: #293a4a;margin: 10px 0 10px 0;width:250px;color:#fff;" />
+                <input type="submit" value="注册" class="btn btn-embossed btn-primary" style="width:230px;" />
+            </form>
         </div>
-	</div>
-
-    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
-    <script src="/static/js/vendor/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/static/js/vendor/video.js"></script>
-    <script src="/static/js/flat-ui.min.js"></script>
-
-    <script type="text/javascript">
-        
-    </script>
-
-  </body>
-</html>
+    </div>
+    <!-- /.wrapper-->
+{% endblock %}
