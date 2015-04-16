@@ -29,7 +29,7 @@
     		background-color: #405564;
     		height: 300px;
             margin: 20px auto 20px auto;
-    		width: 960px;
+    		width: 460px;
     	}
     	.footer {
             background-color: #34495e;
@@ -41,7 +41,7 @@
             margin-right: auto;
         }
         .register-wrapper {
-            width: 130px;
+            width: 250px;
             margin-left: auto;
             margin-right: auto;
             padding-top: 50px;
@@ -61,21 +61,24 @@
 				<input type="submit" value="登录" class="btn btn-default navbar-btn" style="width:120px;" />
 			</form>
 		</nav>
+        <!-- /.navbar-->
 
 		<div class="wrapper">
 			<div class="register-wrapper">
-                <form class="form-group">
+                <form class="form-group" method="POST" action="/register">
                     {% csrf_token %}
-                    <input type="text" placeholder="邮箱" class="form-control" />
-                    <input type="password" placeholder="密码" class="form-control" />
-                    <input type="submit" value="登录" class="btn btn-embossed btn-primary"/>
+                    <input type="text" placeholder="邮箱" class="form-control" style="background-color: #293a4a;margin: 10px 0 10px 0;width:250px;color:#fff;"/>
+                    <input type="password" placeholder="密码" class="form-control" style="background-color: #293a4a;margin: 10px 0 10px 0;width:250px;color:#fff;" />
+                    <input type="submit" value="注册" class="btn btn-embossed btn-primary" style="width:230px;" />
                 </form>
 			</div>
 		</div>
+        <!-- /.wrapper-->
 
         <div class="footer-placeholder" style="height:80px;">
         </div>
     </div>
+    <!-- /.container -->
 
 
 	<div class="navbar-fixed-bottom footer" >
@@ -84,8 +87,6 @@
             <p style="color:#fff">联系我们</p>
         </div>
 	</div>
-
-    <!-- /.container -->
 
     <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
     <script src="/static/js/vendor/jquery.min.js"></script>
