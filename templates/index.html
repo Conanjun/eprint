@@ -7,43 +7,103 @@
             text-align: center;
             color: #fff;
             background-color: #405564;
-            height: 300px;
+            height: 250px;
             margin: 0px auto 20px auto;
             width: 960px;
         }
         .wrapper-content {
-            width: 130px;
+            width: 640px;
             margin-left: auto;
             margin-right: auto;
-            padding-top: 50px;
+            padding-top: 40px;
+        }
+        #red-wrapper {
+            height: 200px;
+        }
+        #try-wrapper {
+            height: 480px;
+        }
+        #try-wrapper > div {
+            height: 480px;
+            width: 320px;
+        }
+        .try-form input {
+            background-color: #293a4a;
+            margin: 10px 0 10px 0;
+            width:320px;
+            color:#fff;
         }
     </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="wrapper">
-        <div class="wrapper-content">
-        </div>
-    </div>
 
-    <div class="wrapper">
+    <div class="wrapper" id="top-wrapper">
         <div class="wrapper-content">
-            <p>This is text</p>
+            <p>这里放点广告宣传啥的</p>
         </div>
     </div>
     <!-- /.wrapper-->
+
+    <div class="wrapper" id="red-wrapper">
+        <div class="wrapper-content">
+            <p>直接点击<a id="try" class="btn btn btn-danger" style="margin: 0 10px;" href="#">我要打印</a>即可开始上传文件打印</p>
+            <p style="font-size: 10px;color: #16a085;">别问我为什么这个按钮是红色的，反正你已经看到了</p>
+        </div>
+    </div>
+    <!-- /.wrapper-->
+
+    <div class="wrapper" id="try-wrapper" style="display: none;">
+        <div class="wrapper-content">
+            <form class="form-group try-form" method="POST" action="/havetry">
+                {% csrf_token %}
+                <input type="text" placeholder="怎么称呼？" class="form-control" />
+                <input type="text" placeholder="留个电话方便我们联系您" class="form-control" />
+
+                <!-- Building select -->
+                <select class="form-control select select-primary select-block mbl" id="build-select" name="building">
+                    <option value="100">选择宿舍以便于我们配送</option>
+                    <optgroup label="本科1组团">
+                        <option value="0">1栋</option>
+                        <option value="1">2栋</option>
+                    </optgroup>
+                    <optgroup label="本科2组团">
+                        <option value="2">x栋</option>
+                        <option value="3">x栋</option>
+                        <option value="4">x栋</option>
+                    </optgroup>
+                </select>
+
+                <input type="file" id="print-file" name="file" class="btn btn-embossed btn-primary"/>
+
+                <input type="submit" value="打印" class="btn btn-embossed btn-primary"
+                    style="width:230px;background-color:#19bb9b;" />
+                <input id="btn-cancel" type="button" value="取消" class="btn btn-embossed btn-primary"
+                    style="width:230px;background-color:#19bb9b;">
+            </form>
+
+            <p style="font-size: 10px;color: #16a085;">未注册用户还是可以打印第一次的</p>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
 
-{% block navbar %}
-
-    <form class="navbar-form navbar-right" action="/login" method="POST" id="user-form">
-        {% csrf_token %}
-        <input type="text" placeholder="邮箱" class="form-control" />
-        <input type="password" placeholder="密码" class="form-control" />
-        <input type="submit" value="登录" class="btn btn-default navbar-btn" style="width:100px;" />
-        <a href="/register" style="padding-left: 20px; padding-right: 20px;">注册</a>
-    </form>
-
+{% block custom_javascript %}
+<script type="text/javascript">
+    $(function(){
+        $("select").select2({dropdownCssClass: 'dropdown-inverse'});
+        $('#try').click(function(){
+            $('#top-wrapper').css('display','none');
+            $('#red-wrapper').css('display','none');
+            $('#try-wrapper').css('display','block');
+        });
+        $('#btn-cancel').click(function(){
+            $('#top-wrapper').css('display','block');
+            $('#red-wrapper').css('display','block');
+            $('#try-wrapper').css('display','none');
+        });
+    });
+</script>
 {% endblock %}

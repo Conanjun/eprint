@@ -10,7 +10,11 @@ urlpatterns = patterns('',
     url(r'^register$','eprint.views.register', name='register'),
     url(r'^login$','eprint.views.user_login', name='user_login'),
     url(r'^contact$','eprint.views.contact', name='contact'),
+
     url(r'^dashboard/',include('dashboard.urls')),
+
+    url(r'^havetry$','print.views.have_try',name='have_try'),
+
     # url(r'^eprint/', include('eprint.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
