@@ -40,35 +40,76 @@
 </ul> <!-- /nav -->
 
 <div class="container" style="color: #fff;">
-	<h4 id="user-info">个人信息</h4>
 
-	<form class="form-horizontal" role="form">
-		<div class="form-group">
-			<label for="nickName" class="control-label col-lg-1">昵称</label>
-			<div class="col-lg-7">
-				<input id="nickName" type="text" placeholder="昵称" class="form-control input-default txt-info"/>
-			</div>
-		</div>
+	<div id="user-info">
+		<h4>个人信息</h4>
 
-		<div class="form-group">
-			<label for="build-select" class="control-label col-lg-1">楼栋</label>
-			<div class="col-lg-7">
-				<select class="form-control select select-primary select-block mbl" id="build-select">
-				  <optgroup label="Profile">
-				    <option value="0">My Profile</option>
-				    <option value="1">My Friends</option>
-				  </optgroup>
-				  <optgroup label="System">
-				    <option value="2">Messages</option>
-				    <option value="3">My Settings</option>
-				    <option value="4">Logout</option>
-				  </optgroup>
-				</select>
+		<form class="form-horizontal" role="form" method="GET" action="/dashboard" >
+			<!-- Nick name form -->
+			<div class="form-group">
+				<label for="name" class="control-label col-lg-1">姓名</label>
+				<div class="col-lg-5">
+					<input name="name" id="name" type="text" placeholder="我们怎么称呼你？" class="form-control input-default txt-info"/>
+				</div>
 			</div>
-		</div>
-	</form>
+
+			<div class="form-group">
+				<label for="tel" class="control-label col-lg-1">电话</label>
+				<div class="col-lg-5">
+					<input name="tel" id="tel" type="text" placeholder="我们怎么联系你？" class="form-control input-default txt-info"/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-lg-1">学号</label>
+				<div class="col-lg-5">
+					<input name="number" id="number" type="text" placeholder="你的学号多少？" class="form-control input-default txt-info"/>
+				</div>
+			</div>
+
+			<!-- Building form -->
+			<div class="form-group">
+				<label for="build-select" class="control-label col-lg-1">宿舍楼</label>
+				<div class="col-lg-5">
+					<select class="form-control select select-primary select-block mbl" id="build-select" name="building">
+					  <optgroup label="本科1组团">
+					    <option value="0">1栋</option>
+					    <option value="1">2栋</option>
+					  </optgroup>
+					  <optgroup label="本科2组团">
+					    <option value="2">x栋</option>
+					    <option value="3">x栋</option>
+					    <option value="4">x栋</option>
+					  </optgroup>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="radio" class="control-label col-lg-1">性别</label>
+				<div class="col-lg-5">
+					<label class="radio" for="girl">
+						<input type="radio" name="optionsRadios" value="0" id="girl" data-toggle="radio">
+						妹子
+		            </label>
+		            <label class="radio" for="boy">
+						<input type="radio" name="optionsRadios" value="1" id="boy" data-toggle="radio">
+						汉子
+		            </label>
+				</div>
+			</div>
+
+			<!-- Submit button -->
+			<div class="form-group">
+				<label class="control-label col-lg-4"></label>
+				<input class="col-lg-1 btn btn-default btn-primary" type="submit" value="确认" />
+			</div>
+		</form>
+	</div>
 	
-	<h4 id="my-print">我的打印</h4>
+	<div id="my-print" 	style="display: none;">
+		<h4 >我的打印</h4>
+	</div>
 
 </div>
 {% endblock %}
@@ -76,8 +117,10 @@
 {% block custom_javascript %}
 <script type="text/javascript">
 	$("select").select2({dropdownCssClass: 'dropdown-inverse'});
+	$(':radio').radiocheck();
+	$('#boy').radiocheck('check');
 	$("#build-select").change(function(){
-		alert($("#build-select option:selected").text());
+		
 	})
 </script>
 {%  endblock %}
