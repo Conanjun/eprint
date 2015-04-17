@@ -41,75 +41,9 @@
 
 <div class="container" style="color: #fff;">
 
-	<div id="user-info">
-		<h4>个人信息</h4>
-
-		<form class="form-horizontal" role="form" method="GET" action="/dashboard" style="width: 700px;">
-			<!-- Nick name form -->
-			<div class="form-group">
-				<label for="name" class="control-label col-lg-2">姓名</label>
-				<div class="col-lg-5">
-					<input name="name" id="name" type="text" placeholder="我们怎么称呼你？" class="form-control input-default txt-info"/>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="tel" class="control-label col-lg-2">电话</label>
-				<div class="col-lg-5">
-					<input name="tel" id="tel" type="text" placeholder="我们怎么联系你？" class="form-control input-default txt-info"/>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="control-label col-lg-2">学号</label>
-				<div class="col-lg-5">
-					<input name="number" id="number" type="text" placeholder="你的学号多少？" class="form-control input-default txt-info"/>
-				</div>
-			</div>
-
-			<!-- Building form -->
-			<div class="form-group">
-				<label for="build-select" class="control-label col-lg-2" >宿舍</label>
-				<div class="col-lg-5">
-					<select class="form-control select select-primary select-block mbl" id="build-select" name="building">
-					  <optgroup label="本科1组团">
-					    <option value="0">1栋</option>
-					    <option value="1">2栋</option>
-					  </optgroup>
-					  <optgroup label="本科2组团">
-					    <option value="2">x栋</option>
-					    <option value="3">x栋</option>
-					    <option value="4">x栋</option>
-					  </optgroup>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="radio" class="control-label col-lg-2">性别</label>
-				<div class="col-lg-5">
-					<label class="radio" for="girl">
-						<input type="radio" name="gender" value="0" id="girl" data-toggle="radio">
-						妹子
-		            </label>
-		            <label class="radio" for="boy">
-						<input type="radio" name="gender" value="1" id="boy" data-toggle="radio">
-						汉子
-		            </label>
-				</div>
-			</div>
-
-			<!-- Submit button -->
-			<div class="form-group">
-				<label class="control-label col-lg-5"></label>
-				<input class="col-lg-1 btn btn-default btn-primary" type="submit" value="确认" />
-			</div>
-		</form>
-	</div>
+{% include 'user_info.html' %}
 	
-	<div id="my-print" 	style="display: none;">
-		<h4 >我的打印</h4>
-	</div>
+{% include 'my_print.html' %}
 
 </div>
 {% endblock %}
@@ -119,6 +53,7 @@
 	$("select").select2({dropdownCssClass: 'dropdown-inverse'});
 	$(':radio').radiocheck();
 	$('#boy').radiocheck('check');
+
 	$('#to-user-info').click(function(){
 		$('#my-print').css('display','none');
 		$('#user-info').css('display','block');

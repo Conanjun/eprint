@@ -16,6 +16,12 @@
             margin-right: auto;
             padding-top: 50px;
         }
+        .register-form input {
+            background-color: #293a4a;
+            margin: 10px 0 10px 0;
+            width:250px;
+            color:#fff;
+        }
     </style>
 {% endblock %}
 
@@ -23,11 +29,12 @@
 <div class="container">
     <div class="wrapper">
         <div class="register-wrapper">
-            <form class="form-group" method="POST" action="/register">
+            <form class="form-group register-form" method="POST" action="/register">
                 {% csrf_token %}
-                <input type="text" placeholder="邮箱" class="form-control" style="background-color: #293a4a;margin: 10px 0 10px 0;width:250px;color:#fff;"/>
-                <input type="password" placeholder="密码" class="form-control" style="background-color: #293a4a;margin: 10px 0 10px 0;width:250px;color:#fff;" />
-                <input type="submit" value="注册" class="btn btn-embossed btn-primary" style="width:230px;" />
+                <input type="text" placeholder="邮箱" class="form-control" />
+                <input type="password" placeholder="密码" class="form-control" />
+                <input type="submit" value="注册" class="btn btn-embossed btn-primary"
+                    style="width:230px;background-color:#19bb9b;" />
             </form>
         </div>
     </div>
