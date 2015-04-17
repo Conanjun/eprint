@@ -32,11 +32,11 @@
 {% endblock %}
 
 {% block content %}
-<ul class="sidebar hide-on-tablets">
+<ul class="sidebar hide-on-tablets" id="sidebar">
 	<h6 style="color: #fff;">个人中心</h6>
 	<p style="color: #fff;">Hackeris</p>
-	<li><a href="#user-info">个人信息</a></li>
-	<li><a href="#my-print">我的打印</a></li>
+	<li><a href="#user-info" id="to-user-info">个人信息</a></li>
+	<li><a href="#my-print" id="to-my-print">我的打印</a></li>
 </ul> <!-- /nav -->
 
 <div class="container" style="color: #fff;">
@@ -119,8 +119,13 @@
 	$("select").select2({dropdownCssClass: 'dropdown-inverse'});
 	$(':radio').radiocheck();
 	$('#boy').radiocheck('check');
-	$("#build-select").change(function(){
-		
-	})
+	$('#to-user-info').click(function(){
+		$('#my-print').css('display','none');
+		$('#user-info').css('display','block');
+	});
+	$('#to-my-print').click(function(){
+		$('#my-print').css('display','block');
+		$('#user-info').css('display','none');
+	});
 </script>
 {%  endblock %}
