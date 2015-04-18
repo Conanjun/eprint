@@ -77,13 +77,27 @@
 
                 <input type="file" id="print-file" name="file" class="btn btn-embossed btn-primary"/>
 
-                <input type="submit" value="打印" class="btn btn-embossed btn-primary"
+                <input id="submit" type="submit" value="打印" class="btn btn-embossed btn-primary"
                     style="width:230px;background-color:#19bb9b;" />
                 <input id="btn-cancel" type="button" value="取消" class="btn btn-embossed btn-primary"
                     style="width:230px;background-color:#19bb9b;">
             </form>
 
             <p style="font-size: 10px;color: #16a085;">未注册用户还是可以打印第一次的</p>
+        </div>
+    </div>
+
+	<div class="wrapper" id="success-wrapper" style="display: none;">
+		<div class="wrapper-content">
+			<p>成功提交，等我们的电话。</p>
+            <p><a id="btn-back" class="btn btn btn-success" style="margin: 0 10px;" href="#">点此返回</a></p>
+		</div>
+	</div>
+
+    <div class="wrapper" id="failed-wrapper" style="display: none;">
+        <div class="wrapper-content">
+            <p>好像有什么不对劲的地方</p>
+            <p><a id="btn-back" class="btn btn-danger" style="margin: 0 10px;" href="#">点此返回</a></p>
         </div>
     </div>
 
@@ -104,6 +118,16 @@
             $('#red-wrapper').css('display','block');
             $('#try-wrapper').css('display','none');
         });
+		$('#submit').click(function(){
+			$('#try-wrapper').css('display','none');
+			$('#success-wrapper').css('display','block');
+			return false;
+		});
+		$('#btn-back').click(function(){
+			$('#success-wrapper').css('display','none');
+            $('#top-wrapper').css('display','block');
+            $('#red-wrapper').css('display','block');
+		});
     });
 </script>
 {% endblock %}
