@@ -56,6 +56,7 @@
 
     <div class="wrapper" id="try-wrapper" style="display: none;">
         <div class="wrapper-content">
+            <p style="font-size: 10px;color: #16a085;">未注册用户可以尝试着打印一次</p>
             <form class="form-group try-form" method="POST" action="/havetry">
                 {% csrf_token %}
                 <input type="text" placeholder="怎么称呼？" class="form-control" />
@@ -82,14 +83,12 @@
                 <input id="btn-cancel" type="button" value="取消" class="btn btn-embossed btn-primary"
                     style="width:230px;background-color:#19bb9b;">
             </form>
-
-            <p style="font-size: 10px;color: #16a085;">未注册用户还是可以打印第一次的</p>
         </div>
     </div>
 
 	<div class="wrapper" id="success-wrapper" style="display: none;">
 		<div class="wrapper-content">
-			<p>成功提交，等我们的电话。</p>
+			<p>成功提交，你可以放心的等待了。</p>
             <p><a id="btn-register" class="btn btn btn-success" style="margin: 0 10px;" href="/register">注册</a></p>
             <p style="font-size: 10px;color: #16a085;">毕竟只能用一次，还是注册一下吧</p>
             <p><a id="btn-back" class="btn btn btn-success" style="margin: 0 10px;" href="#">点此返回</a></p>
