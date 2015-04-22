@@ -7,5 +7,5 @@ from django.shortcuts import HttpResponseRedirect
 
 
 def have_try(request):
-	return HttpResponse('Have try')
+    return HttpResponse('Have try')
 
