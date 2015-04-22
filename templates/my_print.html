@@ -28,7 +28,7 @@
 
         <div class="form-group">
 			<label for="radio" class="control-label col-lg-2">色彩选择</label>
-			<div class="col-lg-5">
+			<div class="col-lg-5" title="彩印和黑白，你懂得" data-toggle="tooltip">
 	            <label class="radio" for="black-white">
 					<input type="radio" name="color" value="1" id="black-white" data-toggle="radio">
 					黑白
@@ -43,14 +43,21 @@
         <div class="form-group">
 			<label for="radio" class="control-label col-lg-2">打印方式</label>
 			<div class="col-lg-5">
-	            <label class="radio" for="free">
+	            <label class="radio" for="free" title="免费打印会有广告嵌入" data-toggle="tooltip">
 					<input type="radio" name="method" value="1" id="free" data-toggle="radio">
 					免费打印
 	            </label>
-				<label class="radio" for="paid">
+				<label class="radio" for="paid" title="付费打印一切正常" data-toggle="tooltip">
 					<input type="radio" name="method" value="0" id="paid" data-toggle="radio">
 					付费打印
 	            </label>
+			</div>
+		</div>
+
+         <div class="form-group">
+			<label for="radio" class="control-label col-lg-2">备注</label>
+			<div class="col-lg-5" title="有没有什么特殊要求？" data-toggle="tooltip">
+                <input name="tel" id="tel" type="text" placeholder="还想交代点什么？" class="form-control input-default txt-info"/>
 			</div>
 		</div>
 
