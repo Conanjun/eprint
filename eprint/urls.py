@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^login$','eprint.views.user_login', name='user_login'),
     url(r'^contact$','eprint.views.contact', name='contact'),
 
-    url(r'^dashboard/',include('dashboard.urls')),
+    url(r'^dashboard$',include('dashboard.urls')),
 
     url(r'^havetry$','print.views.have_try',name='have_try'),
 

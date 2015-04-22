@@ -28,6 +28,12 @@
 		border-color: transparent;
 		color: #fff;
 	}
+	.print-list li {
+		border-color: #fff;
+		color: #fff;
+		background-color: #405564;
+		margin: 10px 0;
+	}
 </style>
 {% endblock %}
 
@@ -53,6 +59,8 @@
 	$("select").select2({dropdownCssClass: 'dropdown-inverse'});
 	$(':radio').radiocheck();
 	$('#boy').radiocheck('check');
+    $('#black-white').radiocheck('check');
+    $('#free').radiocheck('check');
 
 	$('#to-user-info').click(function(){
 		$('#my-print').css('display','none');

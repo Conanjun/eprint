@@ -6,7 +6,7 @@
             text-align: center;
             color: #fff;
             background-color: #405564;
-            height: 300px;
+            height: 350px;
             margin: 20px auto 20px auto;
             width: 460px;
         }
@@ -14,13 +14,13 @@
             width: 250px;
             margin-left: auto;
             margin-right: auto;
-            padding-top: 50px;
+            padding-top: 30px;
         }
         .register-form input {
             background-color: #293a4a;
             margin: 10px 0 10px 0;
-            width:250px;
-            color:#fff;
+            width: 250px;
+            color: #fff;
         }
     </style>
 {% endblock %}
@@ -33,6 +33,22 @@
                 {% csrf_token %}
                 <input type="text" placeholder="邮箱" class="form-control" />
                 <input type="password" placeholder="密码" class="form-control" />
+                <input type="text" placeholder="电话号码" class="form-control" />
+
+                <!-- Building select -->
+                <select class="form-control select select-primary select-block mbl" id="build-select" name="building">
+                    <option value="100">选择宿舍以便于我们配送</option>
+                    <optgroup label="本科1组团">
+                        <option value="0">1栋</option>
+                        <option value="1">2栋</option>
+                    </optgroup>
+                    <optgroup label="本科2组团">
+                        <option value="2">x栋</option>
+                        <option value="3">x栋</option>
+                        <option value="4">x栋</option>
+                    </optgroup>
+                </select>
+
                 <input type="submit" value="注册" class="btn btn-embossed btn-primary"
                     style="width:230px;background-color:#19bb9b;" />
             </form>
@@ -40,4 +56,12 @@
     </div>
     <!-- /.wrapper-->
 </div>
+{% endblock %}
+
+{% block custom_javascript %}
+<script type="text/javascript">
+    $(function(){
+        $("select").select2({dropdownCssClass: 'dropdown-inverse'});
+    });
+</script>
 {% endblock %}
