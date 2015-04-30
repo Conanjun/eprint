@@ -2,7 +2,8 @@
 import os
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+#TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 
 SITE_ROOT=os.path.join(os.path.abspath(os.path.dirname(__file__)),'..')
 

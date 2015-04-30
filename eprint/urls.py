@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'eprint.views.home', name='home'),
     url(r'^register$','eprint.views.register', name='register'),
+    url(r'^api/register$', 'eprint.views.api_register',name='api_register'),
     url(r'^login$','eprint.views.user_login', name='user_login'),
     url(r'^contact$','eprint.views.contact', name='contact'),
 

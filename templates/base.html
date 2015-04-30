@@ -32,10 +32,10 @@
 {% block navbar %}
             {% if user %}
             <!-- Navbar content -->
-            <form class="navbar-form navbar-right" action="/dashboard" method="POST" id="user-form">
+            <form class="navbar-form navbar-right" action="/login" method="POST" id="user-form">
                 {% csrf_token %}
-                <input type="text" placeholder="邮箱" class="form-control" />
-                <input type="password" placeholder="密码" class="form-control" />
+                <input name='email'type="text" placeholder="邮箱" class="form-control" />
+                <input name='password' type="password" placeholder="密码" class="form-control" />
                 <input type="submit" value="登录" class="btn btn-default navbar-btn" style="width:120px;" />
                 <a href="/register" style="padding-left: 20px; padding-right: 20px;">注册</a>
             </form>
