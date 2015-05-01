@@ -44,7 +44,8 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 user_prifile = UserProfile(user=user)
-                return HttpResponse('Ok login')
+#               return HttpResponse('Ok login')
+                return render_to_response('dashboard.html',{'user':uf})
         else:
             uf = UserLoginForm()
             return HttpResponseRedirect('/')
