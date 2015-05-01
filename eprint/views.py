@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from dashboard.models import UserProfile
 
 class UserRegForm(forms.Form):
@@ -38,9 +38,10 @@ def user_login(request):
             print 'enter the is_valid'
             #get the form's parameters
             email = uf.cleaned_data['email']
-            password = uf.cleaned_data['password']
             user = User.objects.get(email=email)
-            if user.check_password(password):
+            password = uf.cleaned_data['password']
+            user = authenticate(username=user.username, password=password)
+            if user is not None:
                 login(request, user)
                 user_prifile = UserProfile(user=user)
                 return HttpResponse('Ok login')
