@@ -40,6 +40,12 @@
     .tooltip-arrow {
         display: none;
     }
+    #upload-to-print {
+        position: absolute;
+        width: 400px;
+        height: 500px;
+        margin: auto auto;
+    }
 </style>
 {% endblock %}
 
@@ -70,10 +76,12 @@
 
 	$('#to-user-info').click(function(){
 		$('#my-print').css('display','none');
+        //$('#upload-to-print').css('display','none');
 		$('#user-info').css('display','block');
 	});
 	$('#to-my-print').click(function(){
 		$('#my-print').css('display','block');
+        //$('#upload-to-print').css('display','block');
 		$('#user-info').css('display','none');
 	});
     $(function () {
