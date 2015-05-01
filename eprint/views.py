@@ -45,7 +45,7 @@ def user_login(request):
                 login(request, user)
                 user_prifile = UserProfile(user=user)
 #               return HttpResponse('Ok login')
-                return render_to_response('dashboard.html',{'user':uf})
+                return render_to_response('dashboard.html',{'user':user})
         else:
             uf = UserLoginForm()
             return HttpResponseRedirect('/')
