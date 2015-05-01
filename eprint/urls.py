@@ -17,6 +17,8 @@ urlpatterns = patterns('',
 
                        url(r'^havetry$', 'print.views.have_try', name='have_try'),
 
+                       url(r'^upfile$','print.view.upfile',name='upfile'),
+
                        # url(r'^eprint/', include('eprint.foo.urls')),
 
                        # Uncomment the admin/doc line below to enable admin documentation:
