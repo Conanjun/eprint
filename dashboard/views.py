@@ -6,4 +6,5 @@ from django.shortcuts import RequestContext
 
 
 def dashboard(request):
-    return render_to_response('dashboard.html')
+    context = RequestContext(request)
+    return render_to_response('dashboard.html', context)

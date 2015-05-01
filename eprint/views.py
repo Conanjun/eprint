@@ -1,11 +1,13 @@
 # -*- coding=utf-8 -*-
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from dashboard.models import UserProfile
+
+
 
 class UserRegForm(forms.Form):
     email = forms.EmailField(label='email', widget=forms.widgets.TextInput())
@@ -32,8 +34,6 @@ def register(request):
 def user_login(request):
     if request.method == 'POST':
         uf = UserLoginForm(request.POST)
-        print request.POST
-
         if uf.is_valid():
             print 'enter the is_valid'
             #get the form's parameters
@@ -43,9 +43,7 @@ def user_login(request):
             user = authenticate(username=user.username, password=password)
             if user is not None:
                 login(request, user)
-                user_prifile = UserProfile(user=user)
-#               return HttpResponse('Ok login')
-                return render_to_response('dashboard.html',{'user':user})
+                return redirect('dashboard')
         else:
             uf = UserLoginForm()
             return HttpResponseRedirect('/')
@@ -55,13 +53,11 @@ def contact(request):
     return HttpResponse('Contact us by email: hackeris@qq.com')
 
 
-#register api
 def api_register(request):
     print 'register had been attached'
     if request.method == 'POST':
         uf = UserRegForm(request.POST)
         if uf.is_valid():
-            #get the form's parameters
             email = uf.cleaned_data['email']
             password = uf.cleaned_data['password']
             phonenumber = uf.cleaned_data['phonenumber']
@@ -81,5 +77,4 @@ def api_register(request):
             return HttpResponse('register success!')
     else:
         uf = UserRegForm()
-    #return render_to_response('my_print.html',{'uf':uf}, context_instance=RequestContext(req))
     return HttpResponseRedirect('/dashboard')

@@ -18,6 +18,7 @@ urlpatterns = patterns('',
                        url(r'^havetry$', 'print.views.have_try', name='have_try'),
 
                        url(r'^trial_order$', 'print.views.trial_order', name='trial_order'),
+                       url(r'print_order', 'print.views.print_order', name='print_order'),
 
                        # url(r'^eprint/', include('eprint.foo.urls')),
 
