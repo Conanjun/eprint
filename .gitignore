@@ -4,5 +4,6 @@
 *.wpr
 *.wpu
 upfile/*
+upfiles/*
 *.txt
 *.exe
