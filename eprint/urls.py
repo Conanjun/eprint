@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 
                        url(r'^havetry$', 'print.views.have_try', name='have_try'),
 
-                       url(r'^upfile$','print.view.upfile',name='upfile'),
+                       url(r'^trial_order$', 'print.views.trial_order', name='trial_order'),
 
                        # url(r'^eprint/', include('eprint.foo.urls')),
 
@@ -27,3 +27,4 @@ urlpatterns = patterns('',
                        # Uncomment the next line to enable the admin:
                        url(r'^admin/', include(admin.site.urls)),
 )
+
