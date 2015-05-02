@@ -3,7 +3,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 from eprint.settings import MEDIA_ROOT
+from django.contrib import admin
 import datetime
+
+admin.autodiscover()
 
 
 class OrderStatus():
@@ -37,3 +40,13 @@ class TrialOrder(models.Model):
     def __unicode__(self):
         return self.file.name
 
+class Print_Order_Admin(admin.ModelAdmin):
+    pass
+
+
+class Trial_Order_Admin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(PrintOrder,Print_Order_Admin)
+admin.site.register(TrialOrder,Trial_Order_Admin)
