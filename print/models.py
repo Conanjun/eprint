@@ -40,13 +40,13 @@ class TrialOrder(models.Model):
     def __unicode__(self):
         return self.file.name
 
-class Print_Order_Admin(admin.ModelAdmin):
+class PrintOrderAdmin(admin.ModelAdmin):
     pass
 
 
-class Trial_Order_Admin(admin.ModelAdmin):
+class TrialOrderAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(PrintOrder,Print_Order_Admin)
-admin.site.register(TrialOrder,Trial_Order_Admin)
+admin.site.register(PrintOrder,PrintOrderAdmin)
+admin.site.register(TrialOrder,TrialOrderAdmin)

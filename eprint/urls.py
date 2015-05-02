@@ -19,6 +19,8 @@ urlpatterns = patterns('',
 
                        url(r'^trial_order$', 'print.views.trial_order', name='trial_order'),
                        url(r'print_order', 'print.views.print_order', name='print_order'),
+                       #url(r'backend','backend.views.admin_login',name='admin_login'),
+                       url(r'^backend/',include('backend.urls')),
 
                        # url(r'^eprint/', include('eprint.foo.urls')),
 

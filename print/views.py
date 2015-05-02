@@ -71,6 +71,7 @@ def trial_order(request):
             trial_order.phone = uf.cleaned_data['phone']
             trial_order.building = uf.cleaned_data['building']
             trial_order.file = uf.cleaned_data['file']
+            trial_order.status = OrderStatus().STATUS_UPLOADED
             trial_order.save()
             return HttpResponse('upload ok!')
     else:
