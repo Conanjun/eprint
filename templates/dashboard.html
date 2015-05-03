@@ -4,49 +4,13 @@
 {% endblock %}
 
 {% block custom_css %}
-<style type="text/css">
-	.sidebar {
-		position: fixed;
-		z-index: 1000;
-		width: 150px;
-		left: 20px;
-		overflow: auto;
-		list-style-type: none;
-		margin-top: 0px;
-	}
-	.sidebar li {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-	.container {
-		margin-top: -20px;
-		margin-left: 250px;
-		width: 960px;
-	}
-	.print-list li {
-		border-color: #fff;
-		color: #fff;
-		background-color: #405564;
-		margin: 10px 0;
-	}
-	.txt-info {
-		background-color: #293a4a;
-		border-color: transparent;
-		color: #fff;
-	}
-    .tooltip-inner {
-        background-color: #1abc9c;
-    }
-    .tooltip-arrow {
-        display: none;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="/static/css/dashboard.css" >
 {% endblock %}
 
 {% block content %}
 <ul class="sidebar hide-on-tablets" id="sidebar">
 	<h6 style="color: #fff;">个人中心</h6>
-	<p style="color: #fff;">Hackeris</p>
+	<p style="color: #fff;">{{user.email}}</p>
 	<li><a href="#user-info" id="to-user-info">个人信息</a></li>
 	<li><a href="#my-print" id="to-my-print">我的打印</a></li>
 </ul> <!-- /nav -->
@@ -70,10 +34,12 @@
 
 	$('#to-user-info').click(function(){
 		$('#my-print').css('display','none');
+        //$('#upload-to-print').css('display','none');
 		$('#user-info').css('display','block');
 	});
 	$('#to-my-print').click(function(){
 		$('#my-print').css('display','block');
+        //$('#upload-to-print').css('display','block');
 		$('#user-info').css('display','none');
 	});
     $(function () {
