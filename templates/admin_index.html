@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block custom_css %}
+    <style type="text/css">
+        .wrapper {
+            text-align: center;
+            color: #fff;
+            background-color: #405564;
+            height: 350px;
+            margin: 20px auto 20px auto;
+            width: 460px;
+        }
+        .register-wrapper {
+            width: 250px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 30px;
+        }
+        .register-form input {
+            background-color: #293a4a;
+            margin: 10px 0 10px 0;
+            width: 250px;
+            color: #fff;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+          <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                <span class="sr-only">Toggle navigation</span>
+              </button>
+              <a class="navbar-brand" href="#">All Orders</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+              <ul class="nav navbar-nav navbar-left">
+                <li><a href="trial_orders_list">TrialOrders</a></li>
+
+                <li><a href="print_orders_list">PrintOrders</a></li>
+               </ul>
+            </div><!-- /.navbar-collapse -->
+          </nav><!-- /navbar -->
+
+
+
+
+{% endblock %}
+
+{% block custom_javascript %}
+<script type="text/javascript">
+    $(function(){
+        $("select").select2({dropdownCssClass: 'dropdown-inverse'});
+    });
+</script>
+{% endblock %}

@@ -292,7 +292,7 @@
     'shivMethods': (options.shivMethods !== false),
 
     /**
-     * A string to describe the type of `html5` object ("default" or "default print").
+     * A string to describe the type of `html5` object ("default" or "default order").
      * @memberOf html5
      * @type String
      */

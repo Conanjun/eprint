@@ -15,10 +15,10 @@ urlpatterns = patterns('',
 
                        url(r'^dashboard$', include('dashboard.urls')),
 
-                       url(r'^havetry$', 'print.views.have_try', name='have_try'),
+                       url(r'^havetry$', 'order.views.have_try', name='have_try'),
 
-                       url(r'^trial_order$', 'print.views.trial_order', name='trial_order'),
-                       url(r'print_order', 'print.views.print_order', name='print_order'),
+                       url(r'^trial_order$', 'order.views.trial_order', name='trial_order'),
+                       url(r'print_order$', 'order.views.print_order', name='print_order'),
                        #url(r'backend','backend.views.admin_login',name='admin_login'),
                        url(r'^backend/',include('backend.urls')),
 
