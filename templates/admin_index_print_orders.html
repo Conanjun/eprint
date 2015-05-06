@@ -54,8 +54,14 @@
             {{ order.user.email }} &nbsp;&nbsp;{{ order.up_file }} &nbsp;&nbsp;{{ order.time }} &nbsp;&nbsp;
             {{ order.status }} &nbsp;&nbsp;{{ order.color }}
             &nbsp;&nbsp;{{ order.method }} &nbsp;&nbsp;{{ order.tel }}
+            <form action="download_files/{{ order.up_file }}" method="post" target="_blank">
+                        {% csrf_token %}
+                        <button class="btn btn-success" type="submit"  name="btn" value="{{ order.up_file }}">download file</button>
+            </form>
             <br>
         {% endfor %}
+
+
     </div>
 
 

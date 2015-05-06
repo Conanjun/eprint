@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_protect
 from order import models as Order
+from django.core.servers.basehttp import FileWrapper
+import os
 
 
 class AdminLoginForm(forms.Form):
@@ -82,4 +84,15 @@ def admin_trial_orders(request):
         return HttpResponseRedirect('login')
 
 
-
+def download_files(request):
+    if request.method == 'POST' and request.POST.has_key('btn'):
+        path = request.path.split('/')
+        filename = path[-2] + '/' + path[-1] #upfiles/main.cpp
+        wrapper = FileWrapper(file(filename))
+        response = HttpResponse(wrapper, content_type='text/plain')
+        response['Content-Length'] = os.path.getsize(filename)
+        response['Content-Encoding'] = 'utf-8'
+        response['Content-Disposition'] = 'attachment;filename=%s' % filename
+        return response
+    else:
+        return HttpResponse('download failed')
