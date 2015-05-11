@@ -1,12 +1,10 @@
 # -*- coding=utf-8 -*-
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
-from django.views.decorators.csrf import csrf_protect
-from order import models as Order
+from order.models import *
 from django.core.servers.basehttp import FileWrapper
 import os
 
@@ -64,7 +62,7 @@ def admin_orders(request):
 def admin_print_orders(request):
     if request.user.is_staff is True:
         context = RequestContext(request)
-        print_orders_list = Order.PrintOrder.objects.order_by("time")
+        print_orders_list = PrintOrder.objects.order_by("time")
         for orders in print_orders_list:
             print orders.user.email
         context['orders_list'] = print_orders_list
@@ -77,7 +75,7 @@ def admin_print_orders(request):
 def admin_trial_orders(request):
     if request.user.is_staff is True:
         context = RequestContext(request)
-        trial_orders_list = Order.TrialOrder.objects.order_by("name")
+        trial_orders_list = TrialOrder.objects.order_by("name")
         context['trial_orders_list'] = trial_orders_list
         return render_to_response('admin_index_trial_orders.html', context)
     else:

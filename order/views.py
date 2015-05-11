@@ -1,8 +1,4 @@
-from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponse
-from django.shortcuts import RequestContext
-from django.shortcuts import HttpResponseRedirect
-from django.views.decorators.csrf import csrf_protect
 from models import TrialOrder
 from models import PrintOrder
 from models import OrderStatus
@@ -37,18 +33,18 @@ def print_order(request):
         if order.is_valid():
             print 'enter the valid'
             user = request.user
-            print_order = PrintOrder()
+            new_print_order = PrintOrder()
 
             # print_order.name= order.cleaned_data['name']
-            print_order.user = user
-            print_order.up_file = order.cleaned_data['file']
-            print_order.time = datetime.datetime.now()
-            print_order.status = OrderStatus().STATUS_UPLOADED
+            new_print_order.user = user
+            new_print_order.up_file = order.cleaned_data['file']
+            new_print_order.time = datetime.datetime.now()
+            new_print_order.status = OrderStatus().STATUS_UPLOADED
 
-            print_order.color = order.cleaned_data['color']
-            print_order.method = order.cleaned_data['method']
-            print_order.tel = order.cleaned_data['tel']
-            print_order.save()
+            new_print_order.color = order.cleaned_data['color']
+            new_print_order.method = order.cleaned_data['method']
+            new_print_order.tel = order.cleaned_data['tel']
+            new_print_order.save()
             return HttpResponse('upload ok')
     else:
         order = PrintOrderForm()
@@ -66,13 +62,13 @@ def trial_order(request):
         uf = TrialOrderForm(request.POST, request.FILES)
         if uf.is_valid():
             print 'enter the valid'
-            trial_order = TrialOrder()
-            trial_order.name = uf.cleaned_data['name']
-            trial_order.phone = uf.cleaned_data['phone']
-            trial_order.building = uf.cleaned_data['building']
-            trial_order.file = uf.cleaned_data['file']
-            trial_order.status = OrderStatus().STATUS_UPLOADED
-            trial_order.save()
+            new_trial_order = TrialOrder()
+            new_trial_order.name = uf.cleaned_data['name']
+            new_trial_order.phone = uf.cleaned_data['phone']
+            new_trial_order.building = uf.cleaned_data['building']
+            new_trial_order.file = uf.cleaned_data['file']
+            new_trial_order.status = OrderStatus().STATUS_UPLOADED
+            new_trial_order.save()
             return HttpResponse('upload ok!')
     else:
         uf = TrialOrderForm()

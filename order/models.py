@@ -1,8 +1,5 @@
 from django.db import models
-from django.db import models
 from django.contrib.auth.models import User
-from django.contrib import admin
-from eprint.settings import MEDIA_ROOT
 from django.contrib import admin
 import datetime
 
@@ -15,6 +12,8 @@ class OrderStatus():
 
     STATUS_UPLOADED = 0x1
     STATUS_DOWNLOADED = 0x2
+    STATUS_PRINTED = 0x3
+    STATUS_FINISHED = 0x4
 
 
 class PrintOrder(models.Model):
@@ -24,7 +23,6 @@ class PrintOrder(models.Model):
     status = models.IntegerField()
     color = models.IntegerField()
     method = models.IntegerField()
-    tel = models.CharField(max_length=100)
 
     def __unicode__(self):
         return self.up_file.name
@@ -33,12 +31,14 @@ class PrintOrder(models.Model):
 class TrialOrder(models.Model):
     name = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
+    time = models.DateTimeField(default=datetime.datetime.now())
     building = models.CharField(max_length=50)
     file = models.FileField(upload_to="upfiles/")
     status = models.IntegerField()
 
     def __unicode__(self):
         return self.file.name
+
 
 class PrintOrderAdmin(admin.ModelAdmin):
     pass
@@ -48,5 +48,5 @@ class TrialOrderAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(PrintOrder,PrintOrderAdmin)
-admin.site.register(TrialOrder,TrialOrderAdmin)
+admin.site.register(PrintOrder, PrintOrderAdmin)
+admin.site.register(TrialOrder, TrialOrderAdmin)
