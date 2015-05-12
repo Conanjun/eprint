@@ -16,7 +16,7 @@ class AdminLoginForm(forms.Form):
 
 def admin_login(request):
     context = RequestContext(request)
-    return render_to_response('admin_login.html', context)
+    return render_to_response('admin/login.html', context)
 
 
 def api_admin_login(request):
@@ -45,7 +45,7 @@ def api_admin_login(request):
 def admin_index(request):
     if request.user.is_staff is True:
         context = RequestContext(request)
-        return render_to_response('admin_index.html', context)
+        return render_to_response('admin/index.html', context)
     else:
         return HttpResponseRedirect('login')
 
@@ -53,7 +53,7 @@ def admin_index(request):
 def admin_orders(request):
     if request.user.is_staff is True:
         context = RequestContext(request)
-        return render_to_response('admin_index_orders.html', context)
+        return render_to_response('admin/orders.html', context)
         # return render_to_response('admin_index_orders.html',context,{"orders":orders})
     else:
         return HttpResponseRedirect('login')
@@ -67,7 +67,7 @@ def admin_print_orders(request):
             print orders.user.email
         context['orders_list'] = print_orders_list
         # {"orders_list": print_orders_list}
-        return render_to_response('admin_index_print_orders.html', context)
+        return render_to_response('admin/print_orders.html', context)
     else:
         return HttpResponseRedirect('login')
 
@@ -77,7 +77,7 @@ def admin_trial_orders(request):
         context = RequestContext(request)
         trial_orders_list = TrialOrder.objects.order_by("name")
         context['trial_orders_list'] = trial_orders_list
-        return render_to_response('admin_index_trial_orders.html', context)
+        return render_to_response('admin/trial_orders.html', context)
     else:
         return HttpResponseRedirect('login')
 
