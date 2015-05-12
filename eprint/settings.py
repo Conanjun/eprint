@@ -128,7 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dashboard',
-    'print',
+    'order',
     'backend',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
