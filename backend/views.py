@@ -53,15 +53,6 @@ def admin_index(request):
         return HttpResponseRedirect('login')
 
 
-def admin_orders(request):
-    if request.user.is_staff:
-        context = RequestContext(request)
-        return render_to_response('admin/orders.html', context)
-        # return render_to_response('admin_index_orders.html',context,{"orders":orders})
-    else:
-        return HttpResponseRedirect('login')
-
-
 def admin_print_orders(request):
     if request.user.is_staff:
         context = RequestContext(request)
