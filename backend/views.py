@@ -46,7 +46,7 @@ def perform_admin_login(request):
 
 
 def admin_index(request):
-    if request.user.is_staff is True:
+    if request.user.is_staff:
         context = RequestContext(request)
         return render_to_response('admin/index.html', context)
     else:
@@ -54,7 +54,7 @@ def admin_index(request):
 
 
 def admin_orders(request):
-    if request.user.is_staff is True:
+    if request.user.is_staff:
         context = RequestContext(request)
         return render_to_response('admin/orders.html', context)
         # return render_to_response('admin_index_orders.html',context,{"orders":orders})
@@ -63,7 +63,7 @@ def admin_orders(request):
 
 
 def admin_print_orders(request):
-    if request.user.is_staff is True:
+    if request.user.is_staff:
         context = RequestContext(request)
         print_orders_list = PrintOrder.objects.order_by("time")
         for orders in print_orders_list:
@@ -76,7 +76,7 @@ def admin_print_orders(request):
 
 
 def admin_trial_orders(request):
-    if request.user.is_staff is True:
+    if request.user.is_staff:
         context = RequestContext(request)
         trial_orders_list = TrialOrder.objects.order_by("name")
         context['trial_orders_list'] = trial_orders_list
