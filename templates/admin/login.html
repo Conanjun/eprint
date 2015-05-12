@@ -30,7 +30,7 @@
     <div class="wrapper">
         <div class="register-wrapper">
             <h3>管理员登陆</h3>
-            <form class="form-group register-form" method="POST" action="/backend/api/login">
+            <form class="form-group register-form" method="POST" action="/backend/login">
                 {% csrf_token %}
                 <input type="text" name="email" placeholder="邮箱" class="form-control" />
                 <input type="password" name="password" placeholder="密码" class="form-control" />

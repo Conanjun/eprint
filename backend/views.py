@@ -14,32 +14,35 @@ class AdminLoginForm(forms.Form):
     password = forms.CharField(label='password', widget=forms.PasswordInput())
 
 
-def admin_login(request):
+def show_login_page(request):
     context = RequestContext(request)
     return render_to_response('admin/login.html', context)
 
 
-def api_admin_login(request):
+def admin_login(request):
     if request.method == 'POST':
-        admin_form = AdminLoginForm(request.POST)
-        if admin_form.is_valid():
-            email = admin_form.cleaned_data['email']
-            password = admin_form.cleaned_data['password']
-            try:
-                admin_user = User.objects.get(email=email)
-            except:
-                return HttpResponse('Login fail')
-            admin_user_auth = authenticate(username=admin_user.username, password=password)
-            if admin_user_auth.is_staff is True:
-                login(request, admin_user_auth)
-                return HttpResponseRedirect('../index')
-                # return HttpResponse('Login Ok')
-            else:
-                return HttpResponse('Login fail')
+        return perform_admin_login(request)
     else:
-        admin_form = AdminLoginForm()
-    return HttpResponse('Login fail')
-    # return HttpResponseRedirect('/backend/login')
+        return show_login_page(request)
+
+
+def perform_admin_login(request):
+    admin_form = AdminLoginForm(request.POST)
+    if admin_form.is_valid():
+        email = admin_form.cleaned_data['email']
+        password = admin_form.cleaned_data['password']
+        try:
+            admin_user = User.objects.get(email=email)
+        except:
+            return show_login_page(request)
+        admin_user_auth = authenticate(username=admin_user.username, password=password)
+        if admin_user_auth.is_staff:
+            login(request, admin_user_auth)
+            return HttpResponseRedirect('../index')
+        else:
+            return show_login_page(request)
+    else:
+        return show_login_page(request)
 
 
 def admin_index(request):
