@@ -43,10 +43,10 @@ def print_order(request):
             new_print_order.method = order.cleaned_data['method']
             new_print_order.tel = order.cleaned_data['tel']
             new_print_order.save()
-            return show_success('upload ok')
+            return show_success('upload ok', 'dashboard')
     else:
         order = PrintOrderForm()
-    return show_success('upload fail')
+    return show_success('upload fail' , 'dashboard')
 
 
 def trial_order(request):
@@ -61,11 +61,11 @@ def trial_order(request):
             new_trial_order.file = uf.cleaned_data['file']
             new_trial_order.status = OrderStatus().STATUS_UPLOADED
             new_trial_order.save()
-            return show_success('Upload ok')
+            return show_success('Upload ok', 'register')
     else:
         uf = TrialOrderForm()
     # return render_to_response('upfile.html',{'uf':uf})
-    return show_success('upload fail')
+    return show_success('upload fail', '/')
     # return HttpResponse('trail successfully')
 
 
