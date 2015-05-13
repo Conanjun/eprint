@@ -41,8 +41,23 @@ def validate_Gender(gender):
     return False
 
 
-# print validate_Email('1526840124@qq.com')
-# print validate_Gender('0')
+def validate_file(filename):
+    file_type = filename[filename.rfind('.'):]
+    if not file_type in ('.doc', '.pdf', '.txt', '.ttf', '.jpg', '.jpeg', '.png', 'bmp'):
+        return False
+    else:
+        return True
+
+
+def validate_status(status):
+    if re.match('^[0,1]{1}$', status) != None:
+        return True
+    return False
+
 
 update_profile_validate = {"name": validate_Name, "phone": validate_Phone, 'student_number': validate_StudentNumber,
-                  'building': validate_Building, 'gender': validate_Gender}
+                           'building': validate_Building, 'gender': validate_Gender}
+
+trial_order_validate = {"name": validate_Name, "phone": validate_Phone, 'building': validate_Building,
+                        'status': validate_status, 'filetype': validate_file}
+

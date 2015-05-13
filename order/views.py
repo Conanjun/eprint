@@ -4,8 +4,8 @@ from models import PrintOrder
 from models import OrderStatus
 from eprint.views import show_success
 import datetime
-
 from django import forms
+from eprint import validate
 
 
 class PrintOrderForm(forms.Form):
@@ -46,7 +46,7 @@ def print_order(request):
             return show_success('upload ok', 'dashboard')
     else:
         order = PrintOrderForm()
-    return show_success('upload fail' , 'dashboard')
+    return show_success('upload fail', 'dashboard')
 
 
 def trial_order(request):
@@ -60,6 +60,15 @@ def trial_order(request):
             new_trial_order.building = uf.cleaned_data['building']
             new_trial_order.file = uf.cleaned_data['file']
             new_trial_order.status = OrderStatus().STATUS_UPLOADED
+
+            # print new_trial_order.file.name
+            if validate.trial_order_validate['name'](new_trial_order.name) and validate.trial_order_validate['phone'](
+                    new_trial_order.phone) and validate.trial_order_validate['building'](new_trial_order.building) and \
+                    validate.trial_order_validate['filetype'](new_trial_order.file.name) and \
+                    validate.trial_order_validate['status'](new_trial_order.status):
+                pass
+            else:
+                return show_success('upload fail', '/')
             new_trial_order.save()
             return show_success('Upload ok', 'register')
     else:
