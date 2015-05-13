@@ -9,11 +9,12 @@ def dashboard(request):
     user = request.user
     if user.is_authenticated():
         user_profile = UserProfile.objects.get(user=user)
+        print user_profile.name
         context = RequestContext(request)
         context['user_profile'] = user_profile
         return render_to_response('dashboard.html', context)
     else:
-        return HttpResponseRedirect('login')
+        return HttpResponseRedirect('/login')
 
 
 def update_profile(request):
@@ -26,6 +27,7 @@ def update_profile(request):
         gender = request.GET['gender']
 
         user_profile = UserProfile.objects.get(user=user)
+        user_profile.name = name
         user_profile.phone_number = phone
         user_profile.building = building
         user_profile.gender = gender
