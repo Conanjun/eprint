@@ -38,7 +38,7 @@ def perform_admin_login(request):
         admin_user_auth = authenticate(username=admin_user.username, password=password)
         if admin_user_auth.is_staff:
             login(request, admin_user_auth)
-            return HttpResponseRedirect('../index')
+            return HttpResponseRedirect('index')
         else:
             return show_login_page(request)
     else:

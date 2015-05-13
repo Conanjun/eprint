@@ -54,8 +54,8 @@ def contact(request):
 
 
 def api_register(request):
-    print 'register had been attached'
     if request.method == 'POST':
+        err = ''
         uf = UserRegForm(request.POST)
         if uf.is_valid():
             email = uf.cleaned_data['email']
@@ -64,7 +64,7 @@ def api_register(request):
             building = uf.cleaned_data['building']
             check_exist = User.objects.filter(email=email)
             if check_exist:
-                return HttpResponse('Email address has been registered.')
+                err = 'exist'
             user = User()
             user_profile = UserProfile()  #   Other data for user
             user.email = email
@@ -74,7 +74,5 @@ def api_register(request):
             user_profile.phone_number = phonenumber
             user_profile.building = building
             user_profile.save()
-            return HttpResponse('register success!')
-    else:
-        uf = UserRegForm()
-    return HttpResponseRedirect('/dashboard')
+            return HttpResponseRedirect('login')
+    return HttpResponseRedirect('register')
