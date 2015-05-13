@@ -6,6 +6,7 @@ from eprint.views import show_success
 import datetime
 from django import forms
 from eprint import validate
+from django.utils.html import escape
 
 
 class PrintOrderForm(forms.Form):
@@ -41,7 +42,15 @@ def print_order(request):
 
             new_print_order.color = order.cleaned_data['color']
             new_print_order.method = order.cleaned_data['method']
-            new_print_order.tel = order.cleaned_data['tel']
+            new_print_order.tel = escape(order.cleaned_data['tel'])
+
+            if validate.print_order_validate['filetype'](new_print_order.up_file.name) and \
+                    validate.print_order_validate['status'](new_print_order.status) and validate.print_order_validate[
+                'method'](new_print_order.method):
+                pass
+            else:
+                return show_success('upload fail', 'dashboard')
+
             new_print_order.save()
             return show_success('upload ok', 'dashboard')
     else:
