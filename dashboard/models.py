@@ -8,6 +8,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     phone_number = models.CharField(max_length=20)
     building = models.CharField(max_length=4)
+    gender = models.IntegerField()
+    number = models.CharField(max_length=15)
 
 
 
