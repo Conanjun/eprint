@@ -45,8 +45,8 @@ def print_order(request):
             new_print_order.tel = escape(order.cleaned_data['tel'])
 
             if validate.print_order_validate['filetype'](new_print_order.up_file.name) and \
-                    validate.print_order_validate['status'](new_print_order.status) and validate.print_order_validate[
-                'method'](new_print_order.method):
+                    validate.print_order_validate['status'](str(new_print_order.status)) and validate.print_order_validate[
+                'method'](str(new_print_order.method)):
                 pass
             else:
                 return show_success('upload fail', 'dashboard')
@@ -70,7 +70,6 @@ def trial_order(request):
             new_trial_order.file = uf.cleaned_data['file']
             new_trial_order.status = OrderStatus().STATUS_UPLOADED
 
-            # print new_trial_order.file.name
             if validate.trial_order_validate['name'](new_trial_order.name) and validate.trial_order_validate['phone'](
                     new_trial_order.phone) and validate.trial_order_validate['building'](new_trial_order.building) and \
                     validate.trial_order_validate['filetype'](new_trial_order.file.name) and \

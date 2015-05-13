@@ -19,7 +19,7 @@
 <div id="upload-to-print" class="modal fade in" style="display: none;">
     <h4>填写打印信息</h4>
 
-    <form class="form-horizontal" role="form" method="POST"  enctype="multipart/form-data" action="print_order" style="width: 700px;">
+    <form class="form-horizontal" role="form" method="POST"  enctype="multipart/form-data" action="/print_order" style="width: 700px;">
         {% csrf_token %}
         <div class="form-group">
             <label class="control-label col-lg-2">上传的文件</label>

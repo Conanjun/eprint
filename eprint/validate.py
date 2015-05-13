@@ -56,13 +56,13 @@ def validate_status(status):
 
 
 def validate_color(color):
-    if re.match('^[0,1]{1}$', color) != None:
+    if re.match('^[0,1]{1}$', str(color)) != None:
         return True
     return False
 
 
 def validate_method(method):
-    if re.match('^[0,1]{1}$', method) != None:
+    if re.match('^[0,1]{1}$', str(method)) != None:
         return True
     return False
 
@@ -73,4 +73,5 @@ update_profile_validate = {"name": validate_Name, "phone": validate_Phone, 'stud
 trial_order_validate = {"name": validate_Name, "phone": validate_Phone, 'building': validate_Building,
                         'status': validate_status, 'filetype': validate_file}
 
-print_order_validate = {'status': validate_status, 'filetype': validate_file,'color':validate_color,'method':validate_method}
+print_order_validate = {'status': validate_status, 'filetype': validate_file, 'color': validate_color,
+                        'method': validate_method}
