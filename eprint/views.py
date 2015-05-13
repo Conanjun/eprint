@@ -76,3 +76,9 @@ def api_register(request):
             user_profile.save()
             return HttpResponseRedirect('login')
     return HttpResponseRedirect('register')
+
+
+def show_success(message='Success', redir=''):
+    context = {'message' : message, 'redir' : redir}
+    return render_to_response('success.html', context)
+

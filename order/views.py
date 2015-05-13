@@ -2,6 +2,7 @@ from django.shortcuts import HttpResponse
 from models import TrialOrder
 from models import PrintOrder
 from models import OrderStatus
+from eprint.views import show_success
 import datetime
 
 from django import forms
@@ -27,15 +28,12 @@ def have_try(request):
 
 def print_order(request):
     if request.method == "POST":
-        print 'enter the post compariation'
         print request.POST
         order = PrintOrderForm(request.POST, request.FILES)
         if order.is_valid():
-            print 'enter the valid'
             user = request.user
             new_print_order = PrintOrder()
 
-            # print_order.name= order.cleaned_data['name']
             new_print_order.user = user
             new_print_order.up_file = order.cleaned_data['file']
             new_print_order.time = datetime.datetime.now()
@@ -45,23 +43,17 @@ def print_order(request):
             new_print_order.method = order.cleaned_data['method']
             new_print_order.tel = order.cleaned_data['tel']
             new_print_order.save()
-            return HttpResponse('upload ok')
+            return show_success('upload ok')
     else:
         order = PrintOrderForm()
-    return HttpResponse('upload fail')
+    return show_success('upload fail')
 
 
 def trial_order(request):
-    print 'enter the trial_order'
-    print request.FILES
-    print request.POST
     file_obj = request.FILES.get('file', None)
-    print file_obj
     if request.method == "POST":
-        print 'enter the post compariation'
         uf = TrialOrderForm(request.POST, request.FILES)
         if uf.is_valid():
-            print 'enter the valid'
             new_trial_order = TrialOrder()
             new_trial_order.name = uf.cleaned_data['name']
             new_trial_order.phone = uf.cleaned_data['phone']
@@ -69,11 +61,11 @@ def trial_order(request):
             new_trial_order.file = uf.cleaned_data['file']
             new_trial_order.status = OrderStatus().STATUS_UPLOADED
             new_trial_order.save()
-            return HttpResponse('upload ok!')
+            return show_success('Upload ok')
     else:
         uf = TrialOrderForm()
     # return render_to_response('upfile.html',{'uf':uf})
-    return HttpResponse('upload fail')
+    return show_success('upload fail')
     # return HttpResponse('trail successfully')
 
 
