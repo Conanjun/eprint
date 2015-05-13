@@ -12,7 +12,7 @@ urlpatterns = patterns('',
                        url(r'^login$', 'eprint.views.user_login', name='user_login'),
                        url(r'^contact$', 'eprint.views.contact', name='contact'),
 
-                       url(r'^dashboard$', include('dashboard.urls')),
+                       url(r'^dashboard/', include('dashboard.urls')),
 
                        url(r'^trial_order$', 'order.views.trial_order', name='trial_order'),
                        url(r'^print_order$', 'order.views.print_order', name='print_order'),
