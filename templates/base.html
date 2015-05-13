@@ -30,7 +30,7 @@
         <nav class="navbar navbar-inverse navbar-lg" role="navigation">
         	<a class="navbar-brand" href="/">E Print</a>
 {% block navbar %}
-            {% if user %}
+            {% if not user %}
             <a href="/logout" style="padding-left: 20px; padding-right: 20px;">退出</a>
             {% else %}
             <!-- Navbar content -->

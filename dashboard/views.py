@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response, render_to_response
 from django.shortcuts import HttpResponse, HttpResponseRedirect, RequestContext
 from dashboard.models import UserProfile
+from eprint import validate
 
 
 def get_user_profile(user):
@@ -35,6 +36,15 @@ def update_profile(request):
         student_number = request.GET['student_number']
         building = request.GET['building']
         gender = request.GET['gender']
+
+        if validate.update_profile_validate['name'](name) and validate.update_profile_validate['phone'](phone) and \
+                validate.update_profile_validate['student_number'] and validate.update_profile_validate['building'] and \
+                validate.update_profile_validate['gender']:
+            pass
+        else:
+            # update profile failed , here need to alert the user
+            return HttpResponse('update failed')
+            # return HttpResponseRedirect('/dashboard')
 
         user_profile = get_user_profile(user)
         if not user_profile:
