@@ -31,6 +31,8 @@
         	<a class="navbar-brand" href="/">E Print</a>
 {% block navbar %}
             {% if user %}
+            <a href="/logout" style="padding-left: 20px; padding-right: 20px;">退出</a>
+            {% else %}
             <!-- Navbar content -->
             <form class="navbar-form navbar-right" action="/login" method="POST" id="user-form">
                 {% csrf_token %}
