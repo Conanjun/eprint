@@ -46,7 +46,7 @@
                 <br>
                 {% for order in trial_orders_list %}
                     {{ order.name }} &nbsp;&nbsp;{{ order.phone }} &nbsp;&nbsp;{{ order.file }} &nbsp;&nbsp;{{ order.building }} &nbsp;&nbsp;{{ order.get_status }}
-                     <form action="download_files/{{ order.file }}" method="post" target="_blank">
+                     <form action="{% url 'backend_download' 'trial_order' order.id %}" method="post" target="_blank">
                         {% csrf_token %}
                         <button class="btn btn-success" type="submit"  name="btn" value="{{ order.up_file }}">download file</button>
                     </form>

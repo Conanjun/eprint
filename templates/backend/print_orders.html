@@ -54,7 +54,7 @@
             {{ order.user.email }} &nbsp;&nbsp;{{ order.up_file }} &nbsp;&nbsp;{{ order.time }} &nbsp;&nbsp;
             {{ order.get_status }} &nbsp;&nbsp;{{ order.get_method }}
             &nbsp;&nbsp;{{ order.method }} &nbsp;&nbsp;{{ order.phone }}
-            <form action="download_files/{{ order.up_file }}" method="post" target="_blank">
+            <form action="{% url 'backend_download' 'print_order' order.id %}" method="post" target="_blank">
                         {% csrf_token %}
                         <button class="btn btn-success" type="submit"  name="btn" value="{{ order.up_file }}">download file</button>
             </form>

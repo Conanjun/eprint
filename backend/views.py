@@ -81,7 +81,8 @@ def backend_trial_orders(request):
 
 
 @staff_view
-def download_files(request):
+def download_files(request, order_type, order_id):
+    print order_id
     if request.method == 'POST' and request.POST.has_key('btn'):
         path = request.path.split('/')
         filename = path[-2] + '/' + path[-1]  # upfiles/main.cpp

@@ -8,6 +8,7 @@ from django import forms
 from eprint import validate
 from eprint.views import authenticated_view
 from django.utils.html import escape
+from django.template import RequestContext
 
 
 class PrintOrderForm(forms.Form):
@@ -39,6 +40,8 @@ def print_order(request):
     if request.method == "POST":
         print 'POST'
         order_form = PrintOrderForm(request.POST, request.FILES)
+        if order_form.is_valid():
+            print 'valid form'
         if order_form.is_valid() and validate_print_order_form(order_form):
             user = request.user
             new_print_order = PrintOrder()
@@ -53,7 +56,7 @@ def print_order(request):
 
             new_print_order.save()
             return show_success('upload ok', 'dashboard')
-    return show_success('upload fail', 'dashboard')
+    return show_success('upload fail', 'dashboard', RequestContext(request))
 
 
 def validate_trail_order_form(trial_form):
@@ -82,4 +85,4 @@ def trial_order(request):
             new_trial_order.save()
             return show_success('Upload ok', 'register')
 
-    return show_success('upload fail', '/')
+    return show_success('upload fail', '/', RequestContext(request))

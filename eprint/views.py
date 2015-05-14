@@ -106,7 +106,8 @@ def contact(request):
     return HttpResponse('Contact us by email: hackeris@qq.com')
 
 
-def show_success(message='Success', redir=''):
-    context = {'message': message, 'redir': redir}
+def show_success(message='Success', redir='', context={}):
+    context['message'] = message
+    context['redir'] = redir
     return render_to_response('success.html', context)
 
