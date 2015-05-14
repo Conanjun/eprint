@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response, render_to_response
 from django.shortcuts import HttpResponse, HttpResponseRedirect, RequestContext
 from dashboard.models import UserProfile
+from order.models import PrintOrder
 from eprint import validate
 from eprint.views import authenticated_view
 from dashboard.models import get_grouped_buildings
@@ -16,6 +17,10 @@ def get_user_profile(user):
     return user_profile
 
 
+def get_user_print_orders(user):
+    return PrintOrder.objects.filter(user=user)
+
+
 @authenticated_view
 def dashboard(request):
     user = request.user
@@ -25,6 +30,7 @@ def dashboard(request):
     context = RequestContext(request)
     context['user_profile'] = user_profile
     context['groups'] = get_grouped_buildings()
+    context['orders'] = get_user_print_orders(user)
     return render_to_response('dashboard.html', context)
 
 
