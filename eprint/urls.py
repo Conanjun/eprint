@@ -8,7 +8,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        url(r'^$', 'eprint.views.home', name='home'),
                        url(r'^register$', 'eprint.views.register', name='register'),
-                       url(r'^api/register$', 'eprint.views.api_register', name='api_register'),
                        url(r'^login$', 'eprint.views.user_login', name='user_login'),
                        url(r'^contact$', 'eprint.views.contact', name='contact'),
 
@@ -16,8 +15,8 @@ urlpatterns = patterns('',
 
                        url(r'^trial_order$', 'order.views.trial_order', name='trial_order'),
                        url(r'^print_order$', 'order.views.print_order', name='print_order'),
-                       url(r'^backend/',include('backend.urls')),
+                       url(r'^backend/', include('backend.urls')),
 
                        url(r'^admin/', include(admin.site.urls)),
-)
+                       )
 

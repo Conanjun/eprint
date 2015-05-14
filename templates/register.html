@@ -29,11 +29,12 @@
 <div class="container">
     <div class="wrapper">
         <div class="register-wrapper">
-            <form class="form-group register-form" method="POST" action="/api/register">
+            <form class="form-group register-form" method="POST" action="/register">
                 {% csrf_token %}
                 <input type="text" name="email" placeholder="邮箱" class="form-control" />
+                <input type="text" name="name" placeholder="用户名" class="form-control" />
                 <input type="password" name="password" placeholder="密码" class="form-control" />
-                <input type="text" name="phonenumber" placeholder="电话号码" class="form-control" />
+                <input type="text" name="phone_number" placeholder="电话号码" class="form-control" />
 
                 <!-- Building select -->
                 <select class="form-control select select-primary select-block mbl" id="build-select" name="building">

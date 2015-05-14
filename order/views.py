@@ -6,6 +6,7 @@ from eprint.views import show_success
 import datetime
 from django import forms
 from eprint import validate
+from eprint.views import authenticated_view
 from django.utils.html import escape
 
 
@@ -22,10 +23,6 @@ class TrialOrderForm(forms.Form):
     file = forms.FileField()
 
 
-def have_try(request):
-    return HttpResponse('Have try')
-
-
 def validate_print_order_form(form):
     color = form.cleaned_data['color']
     method = form.cleaned_data['method']
@@ -37,6 +34,7 @@ def validate_print_order_form(form):
     return False
 
 
+@authenticated_view
 def print_order(request):
     if request.method == "POST":
         order_form = PrintOrderForm(request.POST, request.FILES)
@@ -82,8 +80,5 @@ def trial_order(request):
 
             new_trial_order.save()
             return show_success('Upload ok', 'register')
+
     return show_success('upload fail', '/')
-
-
-def up_file(request):
-    return HttpResponse('upload successfully')
