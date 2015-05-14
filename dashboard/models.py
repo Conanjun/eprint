@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.contrib import admin
 # Create your models here.
 
 
@@ -13,7 +13,7 @@ class Building(models.Model):
     name = models.CharField(max_length=20)
 
 
-def get_buildings():
+def get_grouped_buildings():
     return BuildingGroup.objects.all()
 
 
@@ -25,3 +25,6 @@ class UserProfile(models.Model):
     gender = models.IntegerField()
     number = models.CharField(max_length=15)
 
+
+admin.site.register(BuildingGroup)
+admin.site.register(Building)

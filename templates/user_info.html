@@ -29,15 +29,14 @@
 			<label for="build-select" class="control-label col-lg-2" >宿舍</label>
 			<div class="col-lg-5">
 				<select class="form-control select select-primary select-block mbl" id="build-select" name="building">
-				  <optgroup label="本科1组团">
-				    <option value="0">1栋</option>
-				    <option value="1">2栋</option>
-				  </optgroup>
-				  <optgroup label="本科2组团">
-				    <option value="2">x栋</option>
-				    <option value="3">x栋</option>
-				    <option value="4">x栋</option>
-				  </optgroup>
+				<option value="100">选择宿舍以便于我们配送</option>
+				{% for group in groups %}
+				<optgroup label="{{ group.name }}">
+					{% for building in group.building_set.all %}
+					<option value="{{ building.id }}">{{ building.name }}</option>
+					{% endfor %}
+				</optgroup>
+				{% endfor %}
 				</select>
 			</div>
 		</div>

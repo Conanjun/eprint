@@ -5,6 +5,7 @@ from django.shortcuts import HttpResponse, HttpResponseRedirect, RequestContext
 from dashboard.models import UserProfile
 from eprint import validate
 from eprint.views import authenticated_view
+from dashboard.models import get_grouped_buildings
 
 
 def get_user_profile(user):
@@ -23,6 +24,7 @@ def dashboard(request):
         user_profile = {}
     context = RequestContext(request)
     context['user_profile'] = user_profile
+    context['groups'] = get_grouped_buildings()
     return render_to_response('dashboard.html', context)
 
 

@@ -6,6 +6,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from dashboard.models import UserProfile
+from dashboard.models import get_grouped_buildings
 
 
 def authenticated_view(func):
@@ -71,6 +72,7 @@ def register(request):
         return perform_user_register(request)
     else:
         context = RequestContext(request)
+        context['groups'] = get_grouped_buildings()
         return render_to_response('register.html', context)
 
 
