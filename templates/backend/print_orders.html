@@ -52,7 +52,7 @@
         <br>
         {% for order in orders_list %}
             {{ order.user.email }} &nbsp;&nbsp;{{ order.up_file }} &nbsp;&nbsp;{{ order.time }} &nbsp;&nbsp;
-            {{ order.status }} &nbsp;&nbsp;{{ order.color }}
+            {{ order.get_status }} &nbsp;&nbsp;{{ order.get_method }}
             &nbsp;&nbsp;{{ order.method }} &nbsp;&nbsp;{{ order.phone }}
             <form action="download_files/{{ order.up_file }}" method="post" target="_blank">
                         {% csrf_token %}

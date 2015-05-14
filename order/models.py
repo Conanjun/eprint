@@ -58,6 +58,12 @@ class PrintOrder(models.Model):
     def __unicode__(self):
         return self.up_file.name
 
+    def get_status(self):
+        return OrderStatus.get_status_of(self)
+
+    def get_method(self):
+        return PrintMethod.get_method_print_of(self)
+
 
 class TrialOrder(models.Model):
     name = models.CharField(max_length=50)
@@ -69,6 +75,9 @@ class TrialOrder(models.Model):
 
     def __unicode__(self):
         return self.file.name
+
+    def get_status(self):
+        return OrderStatus.get_status_of(self)
 
 
 class PrintOrderAdmin(admin.ModelAdmin):
