@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
-from dashboard.models import UserProfile
+from dashboard.models import UserProfile, Building
 from dashboard.models import get_grouped_buildings
 
 
@@ -47,7 +47,8 @@ def perform_user_register(request):
         name = uf.cleaned_data['name']
         password = uf.cleaned_data['password']
         phone_number = uf.cleaned_data['phone_number']
-        building = uf.cleaned_data['building']
+        building_id = int(uf.cleaned_data['building'])
+        building = Building.objects.get(id=building_id)
         check_exist = User.objects.filter(email=email)
         if check_exist:
             err = 'exist'
