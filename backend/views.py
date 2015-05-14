@@ -9,6 +9,17 @@ from django.core.servers.basehttp import FileWrapper
 import os
 
 
+def staff_view(func):
+    def _deco(*args, **kwargs):
+        if args[0].user.is_staff:
+            ret = func(*args, **kwargs)
+            return ret
+        else:
+            return HttpResponseRedirect('/login')
+
+    return _deco
+
+
 class AdminLoginForm(forms.Form):
     email = forms.EmailField(label='email', widget=forms.widgets.TextInput())
     password = forms.CharField(label='password', widget=forms.PasswordInput())
@@ -46,40 +57,34 @@ def perform_admin_login(request):
 
 
 def admin_index(request):
-    if request.user.is_staff:
-        context = RequestContext(request)
-        return render_to_response('admin/index.html', context)
-    else:
-        return HttpResponseRedirect('login')
+    context = RequestContext(request)
+    return render_to_response('admin/index.html', context)
 
 
+@staff_view
 def admin_print_orders(request):
-    if request.user.is_staff:
-        context = RequestContext(request)
-        print_orders_list = PrintOrder.objects.order_by("time")
-        for orders in print_orders_list:
-            print orders.user.email
-        context['orders_list'] = print_orders_list
-        # {"orders_list": print_orders_list}
-        return render_to_response('admin/print_orders.html', context)
-    else:
-        return HttpResponseRedirect('login')
+    context = RequestContext(request)
+    print_orders_list = PrintOrder.objects.order_by("time")
+    for orders in print_orders_list:
+        print orders.user.email
+    context['orders_list'] = print_orders_list
+    # {"orders_list": print_orders_list}
+    return render_to_response('admin/print_orders.html', context)
 
 
+@staff_view
 def admin_trial_orders(request):
-    if request.user.is_staff:
-        context = RequestContext(request)
-        trial_orders_list = TrialOrder.objects.order_by("name")
-        context['trial_orders_list'] = trial_orders_list
-        return render_to_response('admin/trial_orders.html', context)
-    else:
-        return HttpResponseRedirect('login')
+    context = RequestContext(request)
+    trial_orders_list = TrialOrder.objects.order_by("name")
+    context['trial_orders_list'] = trial_orders_list
+    return render_to_response('admin/trial_orders.html', context)
 
 
+@staff_view
 def download_files(request):
     if request.method == 'POST' and request.POST.has_key('btn'):
         path = request.path.split('/')
-        filename = path[-2] + '/' + path[-1] #upfiles/main.cpp
+        filename = path[-2] + '/' + path[-1]  # upfiles/main.cpp
         wrapper = FileWrapper(file(filename))
         response = HttpResponse(wrapper, content_type='text/plain')
         response['Content-Length'] = os.path.getsize(filename)

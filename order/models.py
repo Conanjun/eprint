@@ -1,3 +1,4 @@
+# -*- coding=utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
@@ -14,6 +15,36 @@ class OrderStatus():
     STATUS_DOWNLOADED = 0x2
     STATUS_PRINTED = 0x3
     STATUS_FINISHED = 0x4
+
+    @staticmethod
+    def get_status_of(order):
+        if order.status == OrderStatus.STATUS_UPLOADED:
+            return u'已上传'
+        elif order.status == OrderStatus.STATUS_DOWNLOADED:
+            return u'已下载'
+        elif order.status == OrderStatus.STATUS_PRINTED:
+            return u'已打印'
+        elif order.status == OrderStatus.STATUS_FINISHED:
+            return u'已完成'
+        else:
+            return None
+
+
+class PrintMethod():
+    def __init__(self):
+        pass
+
+    PRINT_COLORFUL = 0
+    PRINT_BLACK_WHITE = 1
+
+    @staticmethod
+    def get_method_print_of(order):
+        if order.color == PrintMethod.PRINT_COLORFUL:
+            return u'彩印'
+        elif order.color == PrintMethod.PRINT_BLACK_WHITE:
+            return u'黑白'
+        else:
+            return None
 
 
 class PrintOrder(models.Model):
