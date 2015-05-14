@@ -2,11 +2,11 @@ from django.conf.urls import patterns, include, url
 
 
 urlpatterns = patterns('',
-                       url(r'^$', 'backend.views.admin_index', name='admin_index_default'),
-                       url(r'^login', 'backend.views.admin_login', name='admin_login'),
-                       url(r'^index', 'backend.views.admin_index', name='admin_index'),
-                       url(r'^print_orders_list', 'backend.views.admin_print_orders', name='admin_print_orders'),
-                       url(r'^trial_orders_list', 'backend.views.admin_trial_orders', name='admin_trial_orders'),
+                       url(r'^$', 'backend.views.backend_index', name='backend_index_default'),
+                       url(r'^login', 'backend.views.backend_login', name='backend_login'),
+                       url(r'^index', 'backend.views.backend_index', name='backend_index'),
+                       url(r'^print_orders_list', 'backend.views.backend_print_orders', name='backend_print_orders'),
+                       url(r'^trial_orders_list', 'backend.views.backend_trial_orders', name='backend_trial_orders'),
                        url(r'^download_files/*', 'backend.views.download_files', name='download_files'),
                        )
 
