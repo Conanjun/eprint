@@ -86,7 +86,7 @@ def download_files(request):
         path = request.path.split('/')
         filename = path[-2] + '/' + path[-1]  # upfiles/main.cpp
         wrapper = FileWrapper(file(filename))
-        response = HttpResponse(wrapper, content_type='text/plain')
+        response = HttpResponse(wrapper, content_type='application/octet-stream')
         response['Content-Length'] = os.path.getsize(filename)
         response['Content-Encoding'] = 'utf-8'
         response['Content-Disposition'] = 'attachment;filename=%s' % filename
