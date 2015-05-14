@@ -68,7 +68,6 @@ def backend_print_orders(request):
     for orders in print_orders_list:
         print orders.user.email
     context['orders_list'] = print_orders_list
-    # {"orders_list": print_orders_list}
     return render_to_response('backend/print_orders.html', context)
 
 
@@ -82,15 +81,18 @@ def backend_trial_orders(request):
 
 @staff_view
 def download_files(request, order_type, order_id):
-    print order_id
     if request.method == 'POST' and request.POST.has_key('btn'):
-        path = request.path.split('/')
-        filename = path[-2] + '/' + path[-1]  # upfiles/main.cpp
-        wrapper = FileWrapper(file(filename))
+        if order_type == 'print_order':
+            order = PrintOrder.objects.get(id=order_id)
+        elif order_type == 'trial_order':
+            order = TrialOrder.objects.get(id=order_id)
+        else:
+            return HttpResponse('Error type of order')
+        wrapper = FileWrapper(file(str(order.up_file)))
         response = HttpResponse(wrapper, content_type='application/octet-stream')
-        response['Content-Length'] = os.path.getsize(filename)
+        response['Content-Length'] = os.path.getsize(str(order.up_file))
         response['Content-Encoding'] = 'utf-8'
-        response['Content-Disposition'] = 'attachment;filename=%s' % filename
+        response['Content-Disposition'] = 'attachment;filename=%s' % order.up_file
         return response
     else:
         return HttpResponse('download failed')
