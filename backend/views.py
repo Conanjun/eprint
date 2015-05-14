@@ -15,7 +15,7 @@ def staff_view(func):
             ret = func(*args, **kwargs)
             return ret
         else:
-            return HttpResponseRedirect('/login')
+            return HttpResponseRedirect('/backend/login')
 
     return _deco
 
