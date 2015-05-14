@@ -3,17 +3,19 @@ import re
 
 
 def validate_name(name):
-    if len(name) < 40:
-        if re.match('^[a-zA-Z0-9_\u4e00-\u9fa5]+$', name):
-            return True
-    return False
+    return True
+    # if len(name) < 40:
+    #     if re.match('^[a-zA-Z0-9_\u4e00-\u9fa5]+$', name):
+    #         return True
+    # return False
 
 
 def validate_email(email):
-    if len(email) > 7:
-        if re.match('\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*', email) is not None:
-            return True
-    return False
+    return True
+    # if len(email) > 7:
+    #     if re.match('\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*', email) is not None:
+    #         return True
+    # return False
 
 
 def validate_phone(phone):

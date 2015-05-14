@@ -7,7 +7,6 @@ from eprint import validate
 
 
 def get_user_profile(user):
-    user_profile = None
     try:
         user_profile = UserProfile.objects.get(user=user)
     except:
@@ -28,6 +27,16 @@ def dashboard(request):
         return HttpResponseRedirect('/login')
 
 
+def validate_user_profile(user_profile):
+    if validate.update_profile_validate['name'](user_profile.name)\
+            and validate.update_profile_validate['phone'](user_profile.phone)\
+            and validate.update_profile_validate['student_number'](user_profile.number)\
+            and validate.update_profile_validate['building'](user_profile.building)\
+            and validate.update_profile_validate['gender'](user_profile.gender):
+        return True
+    return False
+
+
 def update_profile(request):
     user = request.user
     if user.is_authenticated():
@@ -36,15 +45,6 @@ def update_profile(request):
         student_number = request.GET['student_number']
         building = request.GET['building']
         gender = request.GET['gender']
-
-        if validate.update_profile_validate['name'](name) and validate.update_profile_validate['phone'](phone) and \
-                validate.update_profile_validate['student_number'] and validate.update_profile_validate['building'] and \
-                validate.update_profile_validate['gender']:
-            pass
-        else:
-            # update profile failed , here need to alert the user
-            return HttpResponse('update failed')
-            # return HttpResponseRedirect('/dashboard')
 
         user_profile = get_user_profile(user)
         if not user_profile:
@@ -55,7 +55,12 @@ def update_profile(request):
         user_profile.building = building
         user_profile.gender = gender
         user_profile.number = student_number
-        user_profile.save()
-        return HttpResponseRedirect('/dashboard')
+
+        if validate_user_profile(user_profile):
+            user_profile.save()
+            return HttpResponseRedirect('/dashboard')
+        else:
+            #   TODO: show error message here
+            return HttpResponseRedirect('/dashboard')
     else:
         return HttpResponseRedirect('/login')
