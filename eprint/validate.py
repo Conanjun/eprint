@@ -11,14 +11,14 @@ def validate_name(name):
 
 def validate_email(email):
     if len(email) > 7:
-        if re.match('\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*', email) != None:
+        if re.match('\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*', email) is not None:
             return True
     return False
 
 
 def validate_phone(phone):
     if len(phone) > 6:
-        if re.match('1\d{10}', phone) != None:
+        if re.match('1\d{10}', phone) is not None:
             return True
     return False
 
