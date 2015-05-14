@@ -64,6 +64,9 @@ class PrintOrder(models.Model):
     def get_method(self):
         return PrintMethod.get_method_print_of(self)
 
+    def get_file_name(self):
+        return self.up_file.name.split('/')[1]
+
 
 class TrialOrder(models.Model):
     name = models.CharField(max_length=50)
