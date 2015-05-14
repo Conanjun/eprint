@@ -12,5 +12,3 @@ class UserProfile(models.Model):
     gender = models.IntegerField()
     number = models.CharField(max_length=15)
 
-
-

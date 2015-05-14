@@ -27,8 +27,8 @@ def validate_print_order_form(form):
     color = form.cleaned_data['color']
     method = form.cleaned_data['method']
     up_file = form.cleaned_data['file']
-    if validate.print_order_validate['filetype'](up_file.name)\
-            and validate.print_order_validate['color'](str(color))\
+    if validate.print_order_validate['filetype'](up_file.name) \
+            and validate.print_order_validate['color'](str(color)) \
             and validate.print_order_validate['method'](str(method)):
         return True
     return False
@@ -61,7 +61,7 @@ def validate_trail_order_form(trial_form):
     building = trial_form.cleaned_data['building']
     file = trial_form.cleaned_data['file']
     if validate.trial_order_validate['name'](name) and validate.trial_order_validate['phone'](phone) \
-            and validate.trial_order_validate['building'](building)\
+            and validate.trial_order_validate['building'](building) \
             and validate.trial_order_validate['filetype'](file.name):
         return True
     return False

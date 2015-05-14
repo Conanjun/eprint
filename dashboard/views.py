@@ -27,10 +27,10 @@ def dashboard(request):
 
 
 def validate_user_profile(user_profile):
-    if validate.update_profile_validate['name'](user_profile.name)\
-            and validate.update_profile_validate['phone'](user_profile.phone)\
-            and validate.update_profile_validate['student_number'](user_profile.number)\
-            and validate.update_profile_validate['building'](user_profile.building)\
+    if validate.update_profile_validate['name'](user_profile.name) \
+            and validate.update_profile_validate['phone'](user_profile.phone) \
+            and validate.update_profile_validate['student_number'](user_profile.number) \
+            and validate.update_profile_validate['building'](user_profile.building) \
             and validate.update_profile_validate['gender'](user_profile.gender):
         return True
     return False
@@ -59,5 +59,5 @@ def update_profile(request):
         user_profile.save()
         return HttpResponseRedirect('/dashboard')
     else:
-        #   TODO: show error message here
+        # TODO: show error message here
         return HttpResponseRedirect('/dashboard')
