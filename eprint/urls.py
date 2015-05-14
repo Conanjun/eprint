@@ -18,6 +18,6 @@ urlpatterns = patterns('',
                        url(r'^print_order$', 'order.views.print_order', name='print_order'),
                        url(r'^backend/', include('backend.urls')),
 
-                       url(r'^admin/', include(admin.site.urls)),
+                       url(r'^admin_xxxx/', include(admin.site.urls)),
                        )
 
