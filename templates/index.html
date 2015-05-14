@@ -48,7 +48,11 @@
 
     <div class="wrapper" id="red-wrapper">
         <div class="wrapper-content">
+        {% if user.username %}
+            <p>点击进入<a class="btn btn btn-danger" style="margin: 0 10px;" href="/dashboard">个人中心</a>即可开始上传文件打印</p>
+        {% else %}
             <p>直接点击<a id="try" class="btn btn btn-danger" style="margin: 0 10px;" href="#">我要打印</a>即可开始上传文件打印</p>
+        {% endif %}
             <p style="font-size: 10px;color: #16a085;">别问我为什么这个按钮是红色的，反正你已经看到了</p>
         </div>
     </div>

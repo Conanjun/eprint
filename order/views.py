@@ -37,6 +37,7 @@ def validate_print_order_form(form):
 @authenticated_view
 def print_order(request):
     if request.method == "POST":
+        print 'POST'
         order_form = PrintOrderForm(request.POST, request.FILES)
         if order_form.is_valid() and validate_print_order_form(order_form):
             user = request.user
@@ -45,7 +46,7 @@ def print_order(request):
             new_print_order.user = user
             new_print_order.up_file = order_form.cleaned_data['file']
             new_print_order.time = datetime.datetime.now()
-            new_print_order.status = OrderStatus().STATUS_UPLOADED
+            new_print_order.status = OrderStatus.STATUS_UPLOADED
 
             new_print_order.color = order_form.cleaned_data['color']
             new_print_order.method = order_form.cleaned_data['method']

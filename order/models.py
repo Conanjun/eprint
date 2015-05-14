@@ -34,8 +34,8 @@ class PrintMethod():
     def __init__(self):
         pass
 
-    PRINT_COLORFUL = 0
-    PRINT_BLACK_WHITE = 1
+    PRINT_COLORFUL = 0x0
+    PRINT_BLACK_WHITE = 0x1
 
     @staticmethod
     def get_method_print_of(order):
