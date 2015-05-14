@@ -30,8 +30,11 @@
         <nav class="navbar navbar-inverse navbar-lg" role="navigation">
         	<a class="navbar-brand" href="/">E Print</a>
 {% block navbar %}
-            {% if not user %}
-            <a href="/logout" style="padding-left: 20px; padding-right: 20px;">退出</a>
+            {% if user.username %}
+                <div class="navbar-form navbar-right">
+                <a href="/dashboard" style="padding-left: 20px; padding-right: 20px;">{{ user.username }}</a>
+                <a href="/logout"  style="padding-left: 20px; padding-right: 20px;">退出</a>
+                </div>
             {% else %}
             <!-- Navbar content -->
             <form class="navbar-form navbar-right" action="/login" method="POST" id="user-form">

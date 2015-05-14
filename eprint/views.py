@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from dashboard.models import UserProfile
 
 
@@ -85,9 +85,18 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 return redirect('dashboard')
+            else:
+                return HttpResponseRedirect('/')
         else:
-            uf = UserLoginForm()
             return HttpResponseRedirect('/')
+    else:
+        return HttpResponseRedirect('/')
+
+
+@authenticated_view
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 
 def contact(request):

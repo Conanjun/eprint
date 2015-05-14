@@ -10,6 +10,7 @@ urlpatterns = patterns('',
                        url(r'^register$', 'eprint.views.register', name='register'),
                        url(r'^login$', 'eprint.views.user_login', name='user_login'),
                        url(r'^contact$', 'eprint.views.contact', name='contact'),
+                       url(r'^logout$', 'eprint.views.user_logout', name='user_logout'),
 
                        url(r'^dashboard/', include('dashboard.urls')),
 
