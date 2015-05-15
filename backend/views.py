@@ -65,8 +65,6 @@ def backend_index(request):
 def backend_print_orders(request):
     context = RequestContext(request)
     print_orders_list = PrintOrder.objects.order_by("time")
-    for orders in print_orders_list:
-        print orders.user.email
     context['orders_list'] = print_orders_list
     return render_to_response('backend/print_orders.html', context)
 
@@ -91,7 +89,7 @@ def download_files(request, order_type, order_id):
 
         order.status = OrderStatus.STATUS_DOWNLOADED
         order.save()
-        
+
         wrapper = FileWrapper(file(str(order.up_file)))
         response = HttpResponse(wrapper, content_type='application/octet-stream')
         response['Content-Length'] = os.path.getsize(str(order.up_file))
