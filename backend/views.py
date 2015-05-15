@@ -87,7 +87,11 @@ def download_files(request, order_type, order_id):
         elif order_type == 'trial_order':
             order = TrialOrder.objects.get(id=order_id)
         else:
-            return HttpResponse('Error type of order')
+            return HttpResponse('/backend/index')
+
+        order.status = OrderStatus.STATUS_DOWNLOADED
+        order.save()
+        
         wrapper = FileWrapper(file(str(order.up_file)))
         response = HttpResponse(wrapper, content_type='application/octet-stream')
         response['Content-Length'] = os.path.getsize(str(order.up_file))
