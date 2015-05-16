@@ -48,19 +48,16 @@
 
 
     <div style="color:#0f0918">
-        this is printorders list.
-        <br>
-        {% for order in orders_list %}
-            {{ order.user.email }} &nbsp;&nbsp;{{ order.up_file }} &nbsp;&nbsp;{{ order.time }} &nbsp;&nbsp;
-            {{ order.get_status }} &nbsp;&nbsp;{{ order.get_method }}
-            &nbsp;&nbsp;{{ order.method }} &nbsp;&nbsp;{{ order.phone }}
-            <form action="{% url backend_download 'print_order' order.id %}" method="post" target="_blank">
-                        {% csrf_token %}
-                        <button class="btn btn-success" type="submit"  name="btn" value="{{ order.up_file }}">download file</button>
-            </form>
-            <br>
-        {% endfor %}
 
+        <ul class="list-group print-list" style="margin-left: 40px; width: 640px;">
+
+            {% for order in orders_list %}
+            <li class="list-group-item" style="border-color: #fff;color: #fff;background-color: #405564;margin: 10px 0;">
+                <h6 class="list-group-item-heading"><a href="{% url backend_download 'print_order' order.id %}" target="_blank">{{ order.get_file_name }}</a></h6>
+                {{ order.get_user }} &nbsp;&nbsp; {{ order.get_user_phone }} <br />
+                {{ order.time }} &nbsp;&nbsp; {{ order.get_print_color_of }} &nbsp;&nbsp; {{ order.get_status }}
+            </li>        
+            {% endfor %}
 
     </div>
 

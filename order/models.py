@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 import datetime
+from dashboard.models import UserProfile
 
 admin.autodiscover()
 
@@ -57,6 +58,13 @@ class PrintOrder(models.Model):
 
     def __unicode__(self):
         return self.up_file.name
+
+    def get_user(self):
+        return self.user.username
+
+    def get_user_phone(self):
+        profile = UserProfile.objects.get(user=self.user)
+        return profile.phone_number
 
     def get_status(self):
         return OrderStatus.get_status_of(self)

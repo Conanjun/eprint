@@ -2,7 +2,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response, render_to_response
 from django.shortcuts import HttpResponse, HttpResponseRedirect, RequestContext
-from dashboard.models import UserProfile
+from dashboard.models import UserProfile, Building
 from order.models import PrintOrder
 from eprint import validate
 from eprint.views import authenticated_view
@@ -37,7 +37,7 @@ def dashboard(request):
 
 def validate_user_profile(user_profile):
     if validate.update_profile_validate['name'](user_profile.name) \
-            and validate.update_profile_validate['phone'](user_profile.phone) \
+            and validate.update_profile_validate['phone'](user_profile.phone_number) \
             and validate.update_profile_validate['student_number'](user_profile.number) \
             and validate.update_profile_validate['building'](user_profile.building) \
             and validate.update_profile_validate['gender'](user_profile.gender):
@@ -51,7 +51,8 @@ def update_profile(request):
     name = request.GET['name']
     phone = request.GET['phone']
     student_number = request.GET['student_number']
-    building = request.GET['building']
+    building_id = request.GET['building']
+    building = Building.objects.get(id=building_id)
     gender = request.GET['gender']
 
     user_profile = get_user_profile(user)

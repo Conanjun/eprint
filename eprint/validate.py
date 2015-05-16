@@ -27,7 +27,7 @@ def validate_phone(phone):
 
 def validate_student_number(student_number):
     if len(student_number) > 6:
-        if re.match('^[0-9]+$') is not None:
+        if re.match('^[0-9]+$', student_number) is not None:
             return True
     return False
 
