@@ -99,6 +99,14 @@ class TrialOrder(models.Model):
     def get_file_name(self):
         return self.up_file.name.split('/')[1]
 
+    @staticmethod
+    def is_this_phone_used(phone):
+        trial_orders = TrialOrder.objects.filter(phone=phone)
+        if not trial_orders:
+            return False
+        else:
+            return True
+
 
 class PrintOrderAdmin(admin.ModelAdmin):
     pass

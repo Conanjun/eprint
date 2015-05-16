@@ -74,12 +74,19 @@ def validate_trail_order_form(trial_form):
 def trial_order(request):
     if request.method == "POST":
         trial_form = TrialOrderForm(request.POST, request.FILES)
+
         if trial_form.is_valid() and validate_trail_order_form(trial_form):
+
+            phone = trial_form.cleaned_data['phone']
+
+            if TrialOrder.is_this_phone_used(phone):
+                return show_success('upload fail', '/', RequestContext(request))
+
             new_trial_order = TrialOrder()
             new_trial_order.name = trial_form.cleaned_data['name']
             new_trial_order.phone = trial_form.cleaned_data['phone']
             new_trial_order.building = trial_form.cleaned_data['building']
-            new_trial_order.file = trial_form.cleaned_data['file']
+            new_trial_order.up_file = trial_form.cleaned_data['file']
             new_trial_order.status = OrderStatus.STATUS_UPLOADED
 
             new_trial_order.save()
