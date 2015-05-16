@@ -1,36 +1,15 @@
 {% extends 'base.html' %}
 
 {% block custom_css %}
-    <style type="text/css">
-        .wrapper {
-            text-align: center;
-            color: #fff;
-            background-color: #405564;
-            height: 350px;
-            margin: 20px auto 20px auto;
-            width: 460px;
-        }
-        .register-wrapper {
-            width: 250px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-top: 30px;
-        }
-        .register-form input {
-            background-color: #293a4a;
-            margin: 10px 0 10px 0;
-            width: 250px;
-            color: #fff;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/static/css/backend.css" >
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="wrapper">
-        <div class="register-wrapper">
+        <div class="llogin-wrapper">
             <h3>管理员登陆</h3>
-            <form class="form-group register-form" method="POST" action="/backend/login">
+            <form class="form-group llogin-form" method="POST" action="/backend/login">
                 {% csrf_token %}
                 <input type="text" name="email" placeholder="邮箱" class="form-control" />
                 <input type="password" name="password" placeholder="密码" class="form-control" />

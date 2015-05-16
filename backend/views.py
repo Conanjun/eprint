@@ -56,6 +56,7 @@ def perform_backend_login(request):
         return show_login_page(request)
 
 
+@staff_view
 def backend_index(request):
     context = RequestContext(request)
     return render_to_response('backend/index.html', context)

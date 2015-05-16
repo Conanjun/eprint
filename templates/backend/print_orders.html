@@ -1,27 +1,6 @@
 {% extends 'base.html' %}
 {% block custom_css %}
-    <style type="text/css">
-        .wrapper {
-            text-align: center;
-            color: #fff;
-            background-color: #405564;
-            height: 350px;
-            margin: 20px auto 20px auto;
-            width: 460px;
-        }
-        .register-wrapper {
-            width: 250px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-top: 30px;
-        }
-        .register-form input {
-            background-color: #293a4a;
-            margin: 10px 0 10px 0;
-            width: 250px;
-            color: #fff;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/static/css/backend.css" >
 {% endblock %}
 
 {% block content %}
@@ -43,10 +22,10 @@
 
     <div style="color:#0f0918">
 
-        <ul class="list-group print-list" style="margin-left: 40px; width: 1100px;">
+        <ul class="list-group order-list">
 
             {% for order in orders_list %}
-            <li class="list-group-item" style="border-color: #fff;color: #fff;background-color: #405564;margin: 10px 0;">
+            <li class="list-group-item">
                 <a href="{% url backend_download 'print_order' order.id %}" target="_blank">{{ order.get_file_name }}</a> 
                 &nbsp;&nbsp;
                 {{ order.get_user }} &nbsp;&nbsp; {{ order.get_user_phone }} &nbsp;&nbsp;
