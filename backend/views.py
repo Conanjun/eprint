@@ -79,24 +79,22 @@ def backend_trial_orders(request):
 
 @staff_view
 def download_files(request, order_type, order_id):
-    if request.method == 'POST' and request.POST.has_key('btn'):
-        if order_type == 'print_order':
-            order = PrintOrder.objects.get(id=order_id)
-        elif order_type == 'trial_order':
-            order = TrialOrder.objects.get(id=order_id)
-        else:
-            return HttpResponse('/backend/index')
 
-        order.status = OrderStatus.STATUS_DOWNLOADED
-        order.save()
-
-        f = open(str(order.up_file), 'rb')
-        data = f.read()
-        f.close()
-        response = HttpResponse(data, content_type='application/octet-stream')
-        response['Content-Length'] = os.path.getsize(str(order.up_file))
-        response['Content-Encoding'] = 'utf-8'
-        response['Content-Disposition'] = 'attachment;filename=%s' % str(order.up_file).split('/')[1]
-        return response
+    if order_type == 'print_order':
+        order = PrintOrder.objects.get(id=order_id)
+    elif order_type == 'trial_order':
+        order = TrialOrder.objects.get(id=order_id)
     else:
-        return HttpResponse('download failed')
+        return HttpResponseRedirect('/backend')
+
+    order.status = OrderStatus.STATUS_DOWNLOADED
+    order.save()
+
+    f = open(str(order.up_file), 'rb')
+    data = f.read()
+    f.close()
+    response = HttpResponse(data, content_type='application/octet-stream')
+    response['Content-Length'] = os.path.getsize(str(order.up_file))
+    response['Content-Encoding'] = 'utf-8'
+    response['Content-Disposition'] = 'attachment;filename=%s' % str(order.up_file).split('/')[1]
+    return response
