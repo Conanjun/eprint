@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django import forms
 from django.contrib.auth import login, authenticate
 from order.models import *
-from django.core.servers.basehttp import FileWrapper
+from dashboard.views import download_file_response
 import os
 
 
@@ -90,14 +90,7 @@ def download_files(request, order_type, order_id):
     order.status = OrderStatus.STATUS_DOWNLOADED
     order.save()
 
-    f = open(str(order.up_file), 'rb')
-    data = f.read()
-    f.close()
-    response = HttpResponse(data, content_type='application/octet-stream')
-    response['Content-Length'] = os.path.getsize(str(order.up_file))
-    response['Content-Encoding'] = 'utf-8'
-    response['Content-Disposition'] = 'attachment;filename=%s' % order.get_file_name()
-    return response
+    return download_file_response(str(order.up_file))
 
 
 @staff_view

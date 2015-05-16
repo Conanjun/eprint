@@ -7,6 +7,7 @@ from order.models import PrintOrder
 from eprint import validate
 from eprint.views import authenticated_view
 from dashboard.models import get_grouped_buildings
+from django.core.servers.basehttp import FileWrapper
 import os
 
 
@@ -81,17 +82,19 @@ def get_order_of(user, id):
     return order
 
 
+def download_file_response(path):
+    wrapper = FileWrapper(file(str(path), 'rb'))
+    response = HttpResponse(wrapper, content_type='application/octet-stream')
+    response['Content-Length'] = os.path.getsize(str(path))
+    response['Content-Encoding'] = 'utf-8'
+    response['Content-Disposition'] = 'attachment;filename=%s' % path.split('/')[-1]
+    return response
+
+
 @authenticated_view
 def download_order_file(request, order_id):
     order = get_order_of(request.user, order_id)
     if not order:
         return HttpResponseRedirect('/dashboard')
 
-    f = open(str(order.up_file), 'rb')
-    data = f.read()
-    f.close()
-    response = HttpResponse(data, content_type='application/octet-stream')
-    response['Content-Length'] = os.path.getsize(str(order.up_file))
-    response['Content-Encoding'] = 'utf-8'
-    response['Content-Disposition'] = 'attachment;filename=%s' % order.get_file_name()
-    return response
+    return download_file_response(str(order.up_file))
