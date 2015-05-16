@@ -73,7 +73,7 @@ class TrialOrder(models.Model):
     phone = models.CharField(max_length=50)
     time = models.DateTimeField(default=datetime.datetime.now())
     building = models.CharField(max_length=50)
-    file = models.FileField(upload_to="upfiles/")
+    up_file = models.FileField(upload_to="upfiles/")
     status = models.IntegerField()
 
     def __unicode__(self):
