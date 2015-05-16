@@ -1,5 +1,5 @@
 # -*- coding=utf-8 -*-
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django import forms
@@ -72,7 +72,7 @@ def backend_print_orders(request):
 @staff_view
 def backend_trial_orders(request):
     context = RequestContext(request)
-    trial_orders_list = TrialOrder.objects.order_by("name")
+    trial_orders_list = TrialOrder.objects.order_by("time")
     context['trial_orders_list'] = trial_orders_list
     return render_to_response('backend/trial_orders.html', context)
 
@@ -98,3 +98,12 @@ def download_files(request, order_type, order_id):
     response['Content-Encoding'] = 'utf-8'
     response['Content-Disposition'] = 'attachment;filename=%s' % order.get_file_name()
     return response
+
+
+@staff_view
+def change_order_status(request, order_id, new_status):
+    order = PrintOrder.objects.get(id=order_id)
+    order.status = new_status
+    order.save()
+    redirect_to = request.GET['redirect_to']
+    return redirect(redirect_to)

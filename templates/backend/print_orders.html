@@ -9,14 +9,12 @@
             margin: 20px auto 20px auto;
             width: 460px;
         }
-
         .register-wrapper {
             width: 250px;
             margin-left: auto;
             margin-right: auto;
             padding-top: 30px;
         }
-
         .register-form input {
             background-color: #293a4a;
             margin: 10px 0 10px 0;
@@ -31,16 +29,12 @@
 
     <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-                <span class="sr-only">Toggle navigation</span>
-            </button>
-            <a class="navbar-brand" href="#">All Orders:</a>
+            <a class="navbar-brand" href="javascript:;">订单分类:</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="trial_orders_list">TrialOrders</a></li>
-
-                <li><a href="print_orders_list">PrintOrders</a></li>
+                <li><a href="print_orders_list">用户订单</a></li>
+                <li><a href="trial_orders_list">试用订单</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -49,14 +43,18 @@
 
     <div style="color:#0f0918">
 
-        <ul class="list-group print-list" style="margin-left: 40px; width: 640px;">
+        <ul class="list-group print-list" style="margin-left: 40px; width: 1100px;">
 
             {% for order in orders_list %}
             <li class="list-group-item" style="border-color: #fff;color: #fff;background-color: #405564;margin: 10px 0;">
-                <h6 class="list-group-item-heading"><a href="{% url backend_download 'print_order' order.id %}" target="_blank">{{ order.get_file_name }}</a></h6>
-                {{ order.get_user }} &nbsp;&nbsp; {{ order.get_user_phone }} <br />
-                {{ order.time }} &nbsp;&nbsp; {{ order.get_print_color_of }} &nbsp;&nbsp; {{ order.get_status }}
-            </li>        
+                <a href="{% url backend_download 'print_order' order.id %}" target="_blank">{{ order.get_file_name }}</a> 
+                &nbsp;&nbsp;
+                {{ order.get_user }} &nbsp;&nbsp; {{ order.get_user_phone }} &nbsp;&nbsp;
+                {{ order.get_building }} &nbsp;&nbsp;
+                {{ order.time }} &nbsp;&nbsp; {{ order.get_print_color_of }} &nbsp;&nbsp; {{ order.get_status }} 
+                &nbsp;&nbsp; <a href="{% url change_order_status order.id 3 %}?redirect_to=backend_print_orders">打印完成</a>
+                &nbsp;&nbsp;<a href="{% url change_order_status order.id 4 %}?redirect_to=backend_print_orders">交易成功</a>
+            </li>
             {% endfor %}
 
     </div>

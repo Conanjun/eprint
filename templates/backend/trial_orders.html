@@ -25,41 +25,44 @@
 {% endblock %}
 
 {% block content %}
-          <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-                <span class="sr-only">Toggle navigation</span>
-              </button>
-              <a class="navbar-brand" href="#">All Orders:</a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse-01">
-              <ul class="nav navbar-nav navbar-left">
-                <li><a href="trial_orders_list">TrialOrders</a></li>
 
-                <li><a href="print_orders_list">PrintOrders</a></li>
-               </ul>
-            </div><!-- /.navbar-collapse -->
-          </nav><!-- /navbar -->
 
-          <div style="color:#0f0918">
-                this is trialorders list.
-                <br>
-                {% for order in trial_orders_list %}
-                    {{ order.name }} &nbsp;&nbsp;{{ order.phone }} &nbsp;&nbsp;{{ order.file }} &nbsp;&nbsp;{{ order.building }} &nbsp;&nbsp;{{ order.get_status }}
-                     <form action="{% url backend_download 'trial_order' order.id %}" method="post" target="_blank">
-                        {% csrf_token %}
-                        <button class="btn btn-success" type="submit"  name="btn" value="{{ order.up_file }}">download file</button>
-                    </form>
-                    <br>
-                {% endfor %}
-            </div>
+    <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="javascript:;">订单分类:</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-01">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="print_orders_list">用户订单</a></li>
+                <li><a href="trial_orders_list">试用订单</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav><!-- /navbar -->
+
+
+    <div style="color:#0f0918">
+
+        <ul class="list-group print-list" style="margin-left: 40px; width: 1000px;">
+
+            {% for order in trial_orders_list %}
+            <li class="list-group-item" style="border-color: #fff;color: #fff;background-color: #405564;margin: 10px 0;">
+                <a href="{% url backend_download 'trial_order' order.id %}" target="_blank">{{ order.get_file_name }}</a> 
+                &nbsp;&nbsp;
+                {{ order.name }} &nbsp;&nbsp; {{ order.phone }} &nbsp;&nbsp;
+                {{ order.time }} &nbsp;&nbsp; 黑白 &nbsp;&nbsp; {{ order.get_status }}
+            </li>
+            {% endfor %}
+
+    </div>
+
 
 {% endblock %}
 
 {% block custom_javascript %}
-<script type="text/javascript">
-    $(function(){
-        $("select").select2({dropdownCssClass: 'dropdown-inverse'});
-    });
-</script>
+    <script type="text/javascript">
+        $(function () {
+            $("select").select2({dropdownCssClass: 'dropdown-inverse'});
+        });
+    </script>
 {% endblock %}

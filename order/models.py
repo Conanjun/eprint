@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 import datetime
-from dashboard.models import UserProfile
+from dashboard.models import UserProfile, Building
 
 admin.autodiscover()
 
@@ -26,7 +26,7 @@ class OrderStatus():
         elif order.status == OrderStatus.STATUS_PRINTED:
             return u'已打印'
         elif order.status == OrderStatus.STATUS_FINISHED:
-            return u'已完成'
+            return u'交易成功'
         else:
             return None
 
@@ -55,12 +55,14 @@ class PrintOrder(models.Model):
     status = models.IntegerField()
     color = models.IntegerField()
     method = models.IntegerField()
+    comment = models.TextField()
 
     def __unicode__(self):
         return self.up_file.name
 
     def get_user(self):
-        return self.user.username
+        profile = UserProfile.objects.get(user=self.user)
+        return profile.name
 
     def get_user_phone(self):
         profile = UserProfile.objects.get(user=self.user)
@@ -74,6 +76,10 @@ class PrintOrder(models.Model):
 
     def get_file_name(self):
         return self.up_file.name.split('/')[1]
+
+    def get_building(self):
+        profile = UserProfile.objects.get(user=self.user)
+        return profile.building.name
 
 
 class TrialOrder(models.Model):
@@ -89,10 +95,7 @@ class TrialOrder(models.Model):
 
     def get_status(self):
         return OrderStatus.get_status_of(self)
-
-    def get_print_color_of(self):
-        return PrintColor.get_print_color_of(self)
-
+        
     def get_file_name(self):
         return self.up_file.name.split('/')[1]
 
