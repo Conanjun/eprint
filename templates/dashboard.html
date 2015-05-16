@@ -25,7 +25,6 @@
 <script type="text/javascript">
 	$("select").select2({dropdownCssClass: 'dropdown-inverse'});
 	$(':radio').radiocheck();
-	$('#boy').radiocheck('check');
     $('#black-white').radiocheck('check');
     $('#paid').radiocheck('check');
 
@@ -40,5 +39,11 @@
     $(function () {
         $('[data-toggle=tooltip]').tooltip();
     });
+    {% if user_profile.gender == 1 %}
+    	$('#boy').radiocheck('check');
+    {% elif user_profile.gender == 0 %}
+    	$('#girl').radiocheck('check');
+    {% endif %}
+    $('#build-select').val({{user_profile.building.id}})
 </script>
 {%  endblock %}
