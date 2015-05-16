@@ -10,7 +10,7 @@ from dashboard.models import get_grouped_buildings
 import os
 
 
-def get_user_profile(user):
+def get_profile_of_user(user):
     try:
         user_profile = UserProfile.objects.get(user=user)
     except:
@@ -25,7 +25,7 @@ def get_user_print_orders(user):
 @authenticated_view
 def dashboard(request):
     user = request.user
-    user_profile = get_user_profile(user)
+    user_profile = get_profile_of_user(user)
     if not user_profile:
         user_profile = {}
     context = RequestContext(request)
@@ -55,7 +55,7 @@ def update_profile(request):
     building = Building.objects.get(id=building_id)
     gender = request.GET['gender']
 
-    user_profile = get_user_profile(user)
+    user_profile = get_profile_of_user(user)
     if not user_profile:
         user_profile = UserProfile()
         user_profile.user = user

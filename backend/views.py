@@ -38,10 +38,10 @@ def backend_login(request):
 
 
 def perform_backend_login(request):
-    backend_form = BackendLoginForm(request.POST)
-    if backend_form.is_valid():
-        email = backend_form.cleaned_data['email']
-        password = backend_form.cleaned_data['password']
+    login_form = BackendLoginForm(request.POST)
+    if login_form.is_valid():
+        email = login_form.cleaned_data['email']
+        password = login_form.cleaned_data['password']
         try:
             backend_user = User.objects.get(email=email)
         except:
@@ -49,7 +49,7 @@ def perform_backend_login(request):
         backend_user_auth = authenticate(username=backend_user.username, password=password)
         if backend_user_auth.is_staff:
             login(request, backend_user_auth)
-            return HttpResponseRedirect('index')
+            return HttpResponseRedirect('/backend/index')
         else:
             return show_login_page(request)
     else:
