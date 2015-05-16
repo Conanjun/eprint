@@ -38,7 +38,7 @@ class PrintMethod():
     PRINT_BLACK_WHITE = 0x1
 
     @staticmethod
-    def get_method_print_of(order):
+    def get_print_method_of(order):
         if order.color == PrintMethod.PRINT_COLORFUL:
             return u'彩印'
         elif order.color == PrintMethod.PRINT_BLACK_WHITE:
@@ -62,7 +62,7 @@ class PrintOrder(models.Model):
         return OrderStatus.get_status_of(self)
 
     def get_method(self):
-        return PrintMethod.get_method_print_of(self)
+        return PrintMethod.get_print_method_of(self)
 
     def get_file_name(self):
         return self.up_file.name.split('/')[1]
@@ -81,6 +81,12 @@ class TrialOrder(models.Model):
 
     def get_status(self):
         return OrderStatus.get_status_of(self)
+
+    def get_method(self):
+        return PrintMethod.get_print_method_of(self)
+
+    def get_file_name(self):
+        return self.up_file.name.split('/')[1]
 
 
 class PrintOrderAdmin(admin.ModelAdmin):

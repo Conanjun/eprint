@@ -96,5 +96,5 @@ def download_files(request, order_type, order_id):
     response = HttpResponse(data, content_type='application/octet-stream')
     response['Content-Length'] = os.path.getsize(str(order.up_file))
     response['Content-Encoding'] = 'utf-8'
-    response['Content-Disposition'] = 'attachment;filename=%s' % str(order.up_file).split('/')[1]
+    response['Content-Disposition'] = 'attachment;filename=%s' % order.get_file_name()
     return response
