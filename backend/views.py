@@ -90,11 +90,13 @@ def download_files(request, order_type, order_id):
         order.status = OrderStatus.STATUS_DOWNLOADED
         order.save()
 
-        wrapper = FileWrapper(file(str(order.up_file)))
-        response = HttpResponse(wrapper, content_type='application/octet-stream')
+        f = open(str(order.up_file), 'rb')
+        data = f.read()
+        f.close()
+        response = HttpResponse(data, content_type='application/octet-stream')
         response['Content-Length'] = os.path.getsize(str(order.up_file))
         response['Content-Encoding'] = 'utf-8'
-        response['Content-Disposition'] = 'attachment;filename=%s' % order.up_file
+        response['Content-Disposition'] = 'attachment;filename=%s' % str(order.up_file).split('/')[1]
         return response
     else:
         return HttpResponse('download failed')
