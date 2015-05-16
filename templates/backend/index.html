@@ -26,19 +26,17 @@
 
 {% block content %}
   <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-        <span class="sr-only">Toggle navigation</span>
-      </button>
-      <a class="navbar-brand" href="#">All Orders:</a>
-    </div>
-    <div class="collapse navbar-collapse" id="navbar-collapse-01">
-      <ul class="nav navbar-nav navbar-left">
-        <li><a href="trial_orders_list">TrialOrders</a></li>
-        <li><a href="print_orders_list">PrintOrders</a></li>
-       </ul>
-    </div><!-- /.navbar-collapse -->
-  </nav><!-- /navbar -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="javascript:;">订单分类:</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-01">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="print_orders_list">用户订单</a></li>
+                <li><a href="trial_orders_list">试用订单</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav><!-- /navbar -->
 {% endblock %}
 
 {% block custom_javascript %}

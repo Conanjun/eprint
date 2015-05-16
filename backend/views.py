@@ -94,9 +94,14 @@ def download_files(request, order_type, order_id):
 
 
 @staff_view
-def change_order_status(request, order_id, new_status):
-    order = PrintOrder.objects.get(id=order_id)
+def change_order_status(request, order_type, order_id, new_status):
+    redirect_to = request.GET['redirect_to']
+    if order_type == 'print_order':
+        order = PrintOrder.objects.get(id=order_id)
+    elif order_type == 'trial_order':
+        order = TrialOrder.objects.get(id=order_id)
+    else:
+        return redirect(redirect_to)
     order.status = new_status
     order.save()
-    redirect_to = request.GET['redirect_to']
     return redirect(redirect_to)

@@ -52,8 +52,8 @@
                 {{ order.get_user }} &nbsp;&nbsp; {{ order.get_user_phone }} &nbsp;&nbsp;
                 {{ order.get_building }} &nbsp;&nbsp;
                 {{ order.time }} &nbsp;&nbsp; {{ order.get_print_color_of }} &nbsp;&nbsp; {{ order.get_status }} 
-                &nbsp;&nbsp; <a href="{% url change_order_status order.id 3 %}?redirect_to=backend_print_orders">打印完成</a>
-                &nbsp;&nbsp;<a href="{% url change_order_status order.id 4 %}?redirect_to=backend_print_orders">交易成功</a>
+                &nbsp;&nbsp; <a href="{% url change_order_status 'print_order' order.id 3 %}?redirect_to=backend_print_orders">打印完成</a>
+                &nbsp;&nbsp;<a href="{% url change_order_status 'print_order' order.id 4 %}?redirect_to=backend_print_orders">交易成功</a>
             </li>
             {% endfor %}
 

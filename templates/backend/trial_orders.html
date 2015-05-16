@@ -43,7 +43,7 @@
 
     <div style="color:#0f0918">
 
-        <ul class="list-group print-list" style="margin-left: 40px; width: 1000px;">
+        <ul class="list-group print-list" style="margin-left: 40px; width: 1100px;">
 
             {% for order in trial_orders_list %}
             <li class="list-group-item" style="border-color: #fff;color: #fff;background-color: #405564;margin: 10px 0;">
@@ -51,6 +51,8 @@
                 &nbsp;&nbsp;
                 {{ order.name }} &nbsp;&nbsp; {{ order.phone }} &nbsp;&nbsp;
                 {{ order.time }} &nbsp;&nbsp; 黑白 &nbsp;&nbsp; {{ order.get_status }}
+                &nbsp;&nbsp; <a href="{% url change_order_status 'trial_order' order.id 3 %}?redirect_to=backend_trial_orders">打印完成</a>
+                &nbsp;&nbsp;<a href="{% url change_order_status 'trial_order' order.id 4 %}?redirect_to=backend_trial_orders">交易成功</a>
             </li>
             {% endfor %}
 
