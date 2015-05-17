@@ -63,19 +63,35 @@ def backend_index(request):
 
 
 @staff_view
-def backend_print_orders(request):
-    context = RequestContext(request)
-    print_orders_list = PrintOrder.objects.order_by("time")
-    context['orders_list'] = print_orders_list
-    return render_to_response('backend/print_orders.html', context)
-
-
-@staff_view
 def backend_trial_orders(request):
     context = RequestContext(request)
     trial_orders_list = TrialOrder.objects.order_by("time")
     context['trial_orders_list'] = trial_orders_list
     return render_to_response('backend/trial_orders.html', context)
+
+
+@staff_view
+def backend_print_orders(request):
+    context = RequestContext(request)
+    print_orders_list = PrintOrder.objects.filter(status=OrderStatus.STATUS_UPLOADED).order_by("time")
+    context['orders_list'] = print_orders_list
+    return render_to_response('backend/print_orders.html', context)
+
+
+@staff_view
+def backend_printed_orders(request):
+    context = RequestContext(request)
+    printed_orders_list = PrintOrder.objects.filter(status=OrderStatus.STATUS_PRINTED).order_by("time")
+    context['printed_orders_list'] = printed_orders_list
+    return render_to_response('backend/printed_orders.html', context)
+
+
+@staff_view
+def backend_finished_orders(request):
+    context = RequestContext(request)
+    finished_orders_list = PrintOrder.objects.filter(status=OrderStatus.STATUS_FINISHED).order_by("time")
+    context['finished_orders_list'] = finished_orders_list
+    return render_to_response('backend/finished_orders.html', context)
 
 
 @staff_view
