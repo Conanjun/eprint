@@ -48,6 +48,23 @@ class PrintColor():
             return None
 
 
+class PrintMethod():
+    def __init__(self):
+        pass
+
+    PAID_PRINT = 0x1
+    FREE_PRINT = 0x2
+
+    @staticmethod
+    def get_print_method(order):
+        if order.method == PrintMethod.PAID_PRINT:
+            return u'付费打印'
+        elif order.method == PrintMethod.FREE_PRINT:
+            return u'免费打印'
+        else:
+            return None
+
+
 class PrintOrder(models.Model):
     user = models.ForeignKey(User)
     up_file = models.FileField(upload_to="upfiles/")

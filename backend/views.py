@@ -65,7 +65,7 @@ def backend_index(request):
 @staff_view
 def backend_trial_orders(request):
     context = RequestContext(request)
-    trial_orders_list = TrialOrder.objects.order_by("time")
+    trial_orders_list = TrialOrder.objects.order_by("time").reverse()
     context['trial_orders_list'] = trial_orders_list
     return render_to_response('backend/trial_orders.html', context)
 
@@ -73,7 +73,7 @@ def backend_trial_orders(request):
 @staff_view
 def backend_print_orders(request):
     context = RequestContext(request)
-    print_orders_list = PrintOrder.objects.filter(status=OrderStatus.STATUS_UPLOADED).order_by("time")
+    print_orders_list = PrintOrder.objects.filter(status=OrderStatus.STATUS_UPLOADED).order_by("time").reverse()
     context['orders_list'] = print_orders_list
     return render_to_response('backend/print_orders.html', context)
 
@@ -81,7 +81,7 @@ def backend_print_orders(request):
 @staff_view
 def backend_printed_orders(request):
     context = RequestContext(request)
-    printed_orders_list = PrintOrder.objects.filter(status=OrderStatus.STATUS_PRINTED).order_by("time")
+    printed_orders_list = PrintOrder.objects.filter(status=OrderStatus.STATUS_PRINTED).order_by("time").reverse()
     context['printed_orders_list'] = printed_orders_list
     return render_to_response('backend/printed_orders.html', context)
 
@@ -89,7 +89,7 @@ def backend_printed_orders(request):
 @staff_view
 def backend_finished_orders(request):
     context = RequestContext(request)
-    finished_orders_list = PrintOrder.objects.filter(status=OrderStatus.STATUS_FINISHED).order_by("time")
+    finished_orders_list = PrintOrder.objects.filter(status=OrderStatus.STATUS_FINISHED).order_by("time").reverse()
     context['finished_orders_list'] = finished_orders_list
     return render_to_response('backend/finished_orders.html', context)
 

@@ -20,7 +20,7 @@ def get_profile_of_user(user):
 
 
 def get_user_print_orders(user):
-    return PrintOrder.objects.filter(user=user)
+    return PrintOrder.objects.filter(user=user).order_by('time').reverse()
 
 
 @authenticated_view

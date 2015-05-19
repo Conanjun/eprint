@@ -9,6 +9,7 @@ from eprint import validate
 from eprint.views import authenticated_view
 from django.utils.html import escape
 from django.template import RequestContext
+from dashboard.views import get_profile_of_user
 
 
 class PrintOrderForm(forms.Form):
@@ -38,10 +39,10 @@ def validate_print_order_form(form):
 @authenticated_view
 def print_order(request):
     if request.method == "POST":
-        print 'POST'
+        user_profile = get_profile_of_user(request.user)
+        if not user_profile or not user_profile.can_use():
+            return show_success('Finish your profile', '/dashboard')
         order_form = PrintOrderForm(request.POST, request.FILES)
-        if order_form.is_valid():
-            print 'valid form'
         if order_form.is_valid() and validate_print_order_form(order_form):
             user = request.user
             new_print_order = PrintOrder()

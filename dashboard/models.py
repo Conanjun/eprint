@@ -25,6 +25,12 @@ class UserProfile(models.Model):
     gender = models.IntegerField()
     number = models.CharField(max_length=15)
 
+    def can_use(self):
+        if self.phone_number:
+            return True
+        else:
+            return False
+
 
 admin.site.register(BuildingGroup)
 admin.site.register(Building)
