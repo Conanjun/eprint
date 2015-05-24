@@ -12,7 +12,7 @@
             width: 960px;
         }
         .wrapper-content {
-            width: 640px;
+            width: 840px;
             margin-left: auto;
             margin-right: auto;
             padding-top: 40px;
@@ -33,6 +33,21 @@
             width:320px;
             color:#fff;
         }
+        #free {
+            float: left;
+            width: 50%;
+            height: 100%;
+            padding-right: 20px;
+        }
+        #paid {
+            float: right;
+            width: 50%;
+            height: 100%;
+            padding-left: 20px;
+        }
+        #paid > p, #free > p {
+            font-size: 16px;
+        }
     </style>
 {% endblock %}
 
@@ -40,8 +55,18 @@
 <div class="container">
 
     <div class="wrapper" id="top-wrapper">
-        <div class="wrapper-content">
-            <p>这里放点广告宣传啥的</p>
+        <div class="wrapper-content" style="height: 250px; padding-top: 0px;">
+            <div id="free" style="padding-top: 20px;">
+                <h6>免费打印</h6>
+                <p>我们提供免费的打印服务，but，我们也会在免费打印的文档中嵌入一些广告</p>
+                <p>适用于一些不那么正式的文档，比如打印点开卷考试参考资料啥的</p>
+            </div>
+            <div id="paid" style="padding-top: 20px;">
+                <h6>付费打印</h6>
+                <p>付费的打印就像平时所使用的打印服务一样，我们尽可能保证打印后的效果与原文档一致</p>
+                <p>适用于正式文档，如论文、实验报告</p>
+                <p>还可以彩印哦</p>
+            </div>
         </div>
     </div>
     <!-- /.wrapper-->

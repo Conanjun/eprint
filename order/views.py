@@ -41,7 +41,7 @@ def print_order(request):
     if request.method == "POST":
         user_profile = get_profile_of_user(request.user)
         if not user_profile or not user_profile.can_use():
-            return show_success('Finish your profile', '/dashboard')
+            return show_success('Finish your profile', '/dashboard', RequestContext(request))
         order_form = PrintOrderForm(request.POST, request.FILES)
         if order_form.is_valid() and validate_print_order_form(order_form):
             user = request.user
@@ -56,7 +56,7 @@ def print_order(request):
             new_print_order.method = order_form.cleaned_data['method']
 
             new_print_order.save()
-            return show_success('upload ok', 'dashboard')
+            return show_success('upload ok', 'dashboard', RequestContext(request))
     return show_success('upload fail', 'dashboard', RequestContext(request))
 
 
